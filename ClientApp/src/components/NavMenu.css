@@ -1,17 +1,49 @@
-﻿a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
+﻿
+    /* nav bar */
 
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    #navLeft {
+      border-right: 0.1rem solid #8D8D8D;
+    }
+
+    #navRight {
+      border-left: 0.1rem solid #8D8D8D;
+    }
+
+    /* notibadge */
+    .icon-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333333;
+      background: none;
+      border: none;
+      outline: none;
+      margin-top: 15%;
+    }
+
+    .icon-button:hover {
+      cursor: pointer;
+    }
+
+    .icon-button:active {
+      color: #FF0000;
+    }
+
+    .icon-button__badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 25px;
+      height: 25px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
