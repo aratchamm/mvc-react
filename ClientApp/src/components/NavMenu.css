@@ -1,17 +1,5 @@
 ﻿
-    /* nav bar */
 
-    #navLeft {
-      border-right: 0.1rem solid #8d8d8d36;
-    }
-
-    #navRight {
-      border-left: 0.1rem solid #8d8d8d36;
-    }
-
-    #navCenter, #navRight,#navLeft  {
-      margin-top: 3%;
-    }
 
     /* notibadge */
     .icon-button {
