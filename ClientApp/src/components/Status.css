@@ -1,0 +1,26 @@
+#navRightStatus {
+    border-left: 0.1rem solid #8d8d8d36;
+    margin: auto;
+    background-color: #8d8d8d13;
+  }
+
+  #HomeStatusButton {
+    margin-bottom: 5%;
+    font-size: 22px;
+    opacity: 50%;
+  }
+
+  #StatusStatusButton {
+    margin-bottom: 5%;
+    font-size: 22px;
+  }
+
+  #HomeIconStatusButton {
+    width: 11%;
+    margin-right: 10%;
+  }
+
+  #StatusIconStatusButton {
+    width: 13%;
+    margin-right: 8%;
+  }

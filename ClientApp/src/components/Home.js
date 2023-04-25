@@ -28,7 +28,7 @@ export class Home extends Component {
                 <NavLink tag={Link} id="HomeButton" className="text-dark" to="/"><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} id="StatusButton" className="text-dark" to="/counter"><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></NavLink>
+                <NavLink tag={Link} id="StatusButton" className="text-dark" to="/Status"><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></NavLink>
               </NavItem>
             </ul>
           
