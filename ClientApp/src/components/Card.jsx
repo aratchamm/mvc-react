@@ -4,7 +4,7 @@ const Data = ({ imgCilentSrc, imgCilentSrc2, Header }) => {
   return (
     <div id="compo" class="container">
               <img class="picCom" src="https://www.workitdaily.com/media-library/man-updates-his-linkedin-profile.jpg?id=27003617"></img>
-              <p>{Header}</p>
+              <div class="p-2"><h3>{Header}</h3></div>
               <div class="container">
                 <div class="row">
                   <div class="col-8">

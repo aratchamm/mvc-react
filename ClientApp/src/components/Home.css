@@ -26,13 +26,7 @@
   }
 
   .material-symbols-outlined, #editInfo {
-    font-size: 16px;
     color: #8D8D8D;
-  }
-  
-  .Info {
-    font-size: 22px;
-    
   }
 
   /* component */
@@ -44,7 +38,6 @@
     background-color: #ffffff;
     box-shadow: 0px 2px 4px #00000049;
     border-radius: 30px;
-    font-size: 24px;
     padding: 0;
     float: left;
     margin: 2%;
@@ -75,13 +68,11 @@
   /* NAV LEFT */
   #HomeButton {
     margin-bottom: 5%;
-    font-size: 22px;
   }
 
   #StatusButton {
     margin-bottom: 5%;
     opacity: 50%;
-    font-size: 22px;
   }
 
   #HomeIconButton {
@@ -115,4 +106,24 @@
     
     #content {
       margin-top: 5%;
+    }
+
+    /* right */
+
+  
+
+    hr {
+      width: 80%;
+      margin: auto;
+    }
+
+    
+    #Fak, #Rub {
+      height: 200px;
+    }
+
+    #view {
+      float: right;
+      color: #00000093;
+      text-decoration: none;
     }
