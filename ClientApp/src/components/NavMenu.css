@@ -4,7 +4,6 @@
     /* notibadge */
     .icon-button {
       position: relative;
-      display: flex;
       align-items: center;
       justify-content: center;
       color: #333333;
@@ -30,7 +29,6 @@
       height: 25px;
       background: red;
       color: #ffffff;
-      display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;

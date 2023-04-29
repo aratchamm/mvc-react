@@ -14,7 +14,6 @@ import DataRubFak from "./DataRubFak";
 import Rub from "./Rub";
 import DataRub from "./DataRub";
 
-
 export class Home extends Component {
   static displayName = Home.name;
 
@@ -23,7 +22,7 @@ export class Home extends Component {
       <div id="content" class="container-fluid">
 
         <div class="row">
-          <div class="col-2 text-center" id="navLeft">
+          <div class="col-12 col-sm-3 col-xs-3 col-lg-2 text-center" id="navLeft">
             {DataProfile.map((data) => (
               <Profile key={data.id} imgSrc={data.imgSrc} name={data.name} tel={data.tel} />
             ))}
@@ -34,19 +33,19 @@ export class Home extends Component {
                 <NavLink tag={Link} id="HomeButton" className="text-dark" to="/"><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} id="StatusButton" className="text-dark" to="/Status"><h3><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></h3></NavLink>
+              <div class="opacity-50"><NavLink tag={Link} id="StatusButton" to="/Status"><h3><img  id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></h3></NavLink></div>
               </NavItem>
             </ul>
 
 
           </div>
-          <div class="col-8 text-center" id="navCenter">
+          <div class="col-12 col-sm-6 col-lg-8 text-center justify-items-center" id="navCenter">
             {DataCard.map((data) => (
               <Card key={data.id} imgCilentSrc={data.imgCilentSrc} imgCilentSrc2={data.imgCilentSrc2} Header={data.Header} />
             ))}
           </div>
 
-          <div class="col-2 text-left" id="navRight">
+          <div class="col-12 col-sm-3 col-lg-2 text-left" id="navRight">
             <div class="p-5"><h2><b>รายการรับฝาก</b></h2></div>
             <hr></hr>
             <div id="Fak">

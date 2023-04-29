@@ -1,25 +1,106 @@
-  @media (max-width: 575px) {
+  /* xs */
+  @media (max-width: 767px ) {
     .icon-button {
       display: none;
     }
-  }
-  
-  
-  @media (min-width: 576px) {
 
-    #profileIMG {
-      width: 150px;
-      height: 150px;
+    #navLeft {
+      margin-bottom: 10%;
+      border-bottom: 0.1rem solid #8d8d8d36;
     }
-    
-    .icon-button {
-      display: flex;
+
+    #navRight {
+      margin-top: 10%;
+      border-top: 0.1rem solid #8d8d8d36;
+    }
+
+    #compo {
+      width: 420px;
+      height: 300px;
+      margin: 2%;
+    }
+
+  }
+
+  /* md ipad */
+  @media (max-width: 991px) and (min-width: 768px ) {
+    #navCenter {
+      border-left: 0.1rem solid #8d8d8d36;
+      border-right: 0.1rem solid #8d8d8d36;
+      margin: auto;
+    }
+    #navLeft, #navRight {
+      position: fixed;
+    }
+
+    #compo {
+      width: 150px;
+      height: 200px;
+      margin: 2%;
+    }
+
+  }
+
+   /* lg */
+   @media (max-width: 1199px) and (min-width: 992px ) {
+    #navCenter {
+      border-left: 0.1rem solid #8d8d8d36;
+      border-right: 0.1rem solid #8d8d8d36;
+      margin: auto;
+    }
+    #navLeft, #navRight {
+      position: fixed;
+    }
+
+    #compo {
+      width: 350px;
+      height: 300px;
+      margin: 2%;
+    }
+
+
+   }
+  
+    /* xl */
+  @media (max-width: 1399px) and (min-width: 1200px ) {
+    #navCenter {
+      border-left: 0.1rem solid #8d8d8d36;
+      border-right: 0.1rem solid #8d8d8d36;
+      margin: auto;
+    }
+    #navLeft, #navRight {
+      position: fixed;
+    }
+    #compo {
+      width: 350px;
+      height: 300px;
+      margin: 2%;
+    }
+
+  }
+
+   /* xxl */
+  @media (min-width: 1400px ) {
+
+    #navCenter {
+      border-left: 0.1rem solid #8d8d8d36;
+      border-right: 0.1rem solid #8d8d8d36;
+      margin: auto;
+    }
+    #navLeft, #navRight {
+      position: fixed;
+    }
+    #compo {
+      width: 350px;
+      height: 300px;
+      margin: 2%;
     }
   }
+  
   
   #profileIMG {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 50%;
     margin-top: 20%;
@@ -29,18 +110,24 @@
     color: #8D8D8D;
   }
 
+  #navLeft {
+    left: 0;
+  }
+  #navRight {
+    right: 0;
+    background-color: white;
+    border-radius: 20px;
+  }
+
   /* component */
 
   
   #compo {
-    width: 350px;
-    height: 300px;
     background-color: #ffffff;
     box-shadow: 0px 2px 4px #00000049;
     border-radius: 30px;
     padding: 0;
     float: left;
-    margin: 2%;
   }
 
   .picCom {
@@ -72,7 +159,6 @@
 
   #StatusButton {
     margin-bottom: 5%;
-    opacity: 50%;
   }
 
   #HomeIconButton {
@@ -86,23 +172,9 @@
     
   }
 
-    /* nav bar */
 
-    #navLeft {
-      position: fixed;
-      left: 0;
-    }
 
-    #navRight {
-      right: 0;
-      position: fixed;
-    }
 
-    #navCenter {
-      border-left: 0.1rem solid #8d8d8d36;
-      border-right: 0.1rem solid #8d8d8d36;
-      margin: auto;
-    }
     
     #content {
       margin-top: 5%;
@@ -119,7 +191,7 @@
 
     
     #Fak, #Rub {
-      height: 200px;
+      height: 250px;
     }
 
     #view {

@@ -4,6 +4,7 @@ import DataProfile from "./DataProfile";
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import './Status.css';
+import './Home.css';
 
 export class Status extends Component {
   static displayName = Status.name;
@@ -21,10 +22,10 @@ export class Status extends Component {
               <br />
               <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} id="HomeStatusButton" className="text-dark" to="/"><img id="HomeIconStatusButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></NavLink>
+              <div class="opacity-50"><NavLink tag={Link} id="HomeButton" className="text-dark" to="/"><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink></div>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} id="StatusStatusButton" className="text-dark" to="/Status"><img id="StatusIconStatusButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></NavLink>
+              <NavLink tag={Link} id="StatusButton" to="/Status"><h3><img  id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></h3></NavLink>
               </NavItem>
             </ul>
           
