@@ -2,4 +2,15 @@
     border-left: 0.1rem solid #8d8d8d36;
     margin: auto;
     background-color: #8d8d8d13;
+    height: 100%;
   }
+
+body.Status {
+  background-image: url('https://sv1.picz.in.th/images/2023/04/27/yZ7ifN.png');
+  
+  font-family: "Mitr", sans-serif;
+}
+
+#navLeftStatus {
+  margin-top: 3%;
+}

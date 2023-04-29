@@ -1,9 +1,9 @@
 import React from "react";
 
-const Data = ({ Status, Menu }) => {
+const Data = ({ Status, Menu,Color }) => {
   return (
     <div class="row p-1">
-      <div class="col-5 h6 text-left">
+      <div style={{color:Color}} class="col-5 h6 text-left">
         {Status}
       </div>
       <div class="col-7 h6 text-left">

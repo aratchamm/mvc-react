@@ -1,4 +1,10 @@
-  /* xs */
+body.HOME {
+  background-image: url('https://sv1.picz.in.th/images/2023/04/27/yZ7ifN.png');
+  font-family: "Mitr", sans-serif;
+  
+}  
+
+/* xs */
   @media (max-width: 767px ) {
     .icon-button {
       display: none;
@@ -87,6 +93,11 @@
       border-right: 0.1rem solid #8d8d8d36;
       margin: auto;
     }
+
+    #navLeft {
+      margin-top: 3%;
+    }
+
     #navLeft, #navRight {
       position: fixed;
     }
@@ -99,11 +110,11 @@
   
   
   #profileIMG {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
+    margin: auto;
     object-fit: cover;
     border-radius: 50%;
-    margin-top: 20%;
   }
 
   .material-symbols-outlined, #editInfo {
@@ -172,9 +183,6 @@
     
   }
 
-
-
-
     
     #content {
       margin-top: 5%;
@@ -199,3 +207,18 @@
       color: #00000093;
       text-decoration: none;
     }
+
+    body.HOME::-webkit-scrollbar {
+      width: 12px;
+      background-color: #F5F5F5;
+    }
+    
+    body.HOME::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #ff000d;
+    }
+    
+    body.HOME::-webkit-scrollbar-thumb:hover {
+      background-color: #d5000b;
+    }
+    

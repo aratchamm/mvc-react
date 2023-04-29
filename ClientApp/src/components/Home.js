@@ -14,8 +14,16 @@ import DataRubFak from "./DataRubFak";
 import Rub from "./Rub";
 import DataRub from "./DataRub";
 
+
 export class Home extends Component {
   static displayName = Home.name;
+
+  componentDidMount() {
+    document.body.classList.add('HOME');
+}
+componentWillUnmount() {
+  document.body.className = '';
+}
 
   render() {
     return (
@@ -30,7 +38,7 @@ export class Home extends Component {
             <br />
             <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} id="HomeButton" className="text-dark" to="/"><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink>
+                <NavLink tag={Link} id="HomeButton" className="text-dark" to="/Home"><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink>
               </NavItem>
               <NavItem>
               <div class="opacity-50"><NavLink tag={Link} id="StatusButton" to="/Status"><h3><img  id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></h3></NavLink></div>
@@ -75,7 +83,7 @@ export class Home extends Component {
                   </div>
 
                   {DataRub.map((data) => (
-              <Rub key={data.id} Status={data.Status} Menu={data.Menu} />
+              <Rub key={data.id} Status={data.Status} Menu={data.Menu} Color={data.Color} />
             ))}
                 
             </div>
