@@ -1,32 +1,52 @@
 body.HOME {
   background-image: url('https://sv1.picz.in.th/images/2023/04/27/yZ7ifN.png');
   font-family: "Mitr", sans-serif;
-  
+  background-position: left bottom; 
 }  
 
+
 /* xs */
-  @media (max-width: 767px ) {
-    .icon-button {
-      display: none;
-    }
+@media (max-width: 375px) {
 
-    #navLeft {
-      margin-bottom: 10%;
-      border-bottom: 0.1rem solid #8d8d8d36;
-    }
+  #navLeft {
+    border-bottom: 0.1rem solid #8d8d8d36;
+  }
 
-    #navRight {
-      margin-top: 10%;
-      border-top: 0.1rem solid #8d8d8d36;
-    }
+  .Info {
+    margin-top: 10%;
+  }
 
-    #compo {
-      width: 420px;
-      height: 300px;
-      margin: 2%;
-    }
+  #navRight {
+    padding-top: 10%;
+    border-top: 0.1rem solid #8d8d8d36;
+    padding-bottom: 10%;
+  }
+
+  #compo {
+    width: 280px;
+    height: 250px;
+    margin: 2%;
+  }
+
+  .photoCol {
+    width: 20%;
+  }
+
+  #Fak, #Rub {
+    height: 190px;
+  }
+
+  #Get {
+    display: none;
+  }
+
+  #navCenter {
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
 
   }
+
 
   /* md ipad */
   @media (max-width: 991px) and (min-width: 768px ) {
@@ -34,6 +54,7 @@ body.HOME {
       border-left: 0.1rem solid #8d8d8d36;
       border-right: 0.1rem solid #8d8d8d36;
       margin: auto;
+      margin-top: 5%;
     }
     #navLeft, #navRight {
       position: fixed;
@@ -42,7 +63,29 @@ body.HOME {
     #compo {
       width: 150px;
       height: 200px;
-      margin: 2%;
+    }
+
+    .plus{
+        width: 100%;
+    }
+
+    .photoCol {
+      width: 23%;
+      height: 63%;
+      margin-top: -5%;
+    }
+
+    #Fak, #Rub {
+      height: 250px;
+    }
+
+
+    body.HOME {
+      background-size: 170%;
+    }
+    
+    #navRight, #navLeft {
+      margin-top: 15%;
     }
 
   }
@@ -63,6 +106,23 @@ body.HOME {
       height: 300px;
       margin: 2%;
     }
+    .plus{
+      width: 70%;
+      max-width: 200px;
+      margin-top: 10px;
+  }
+  .photoCol {
+    width: 23%;
+    height: 60%;}
+
+    #Fak, #Rub {
+      height: 250px;
+    }
+    #navRight {
+      position: fixed;
+      top: 50%;
+      transform: translate(0%, -50%);
+    }
 
 
    }
@@ -82,6 +142,24 @@ body.HOME {
       height: 300px;
       margin: 2%;
     }
+    .plus{
+      width: 70%;
+      max-width: 200px;
+      margin-top: 10px;
+  }
+  .photoCol {
+    width: 23%;
+    height: 60%;}
+
+    #Fak, #Rub {
+      height: 250px;
+    }
+    #navRight {
+      position: fixed;
+      top: 50%;
+      transform: translate(0%, -50%);
+    }
+
 
   }
 
@@ -94,20 +172,40 @@ body.HOME {
       margin: auto;
     }
 
-    #navLeft {
-      margin-top: 3%;
-    }
-
     #navLeft, #navRight {
       position: fixed;
     }
+    
     #compo {
-      width: 350px;
+      width: 370px;
       height: 300px;
       margin: 2%;
+      justify-content: center;
     }
+    .plus{
+      width: 70%;
+      max-width: 200px;
+      margin-top: 10px;
   }
-  
+
+  .photoCol {
+    width: 20%;
+    height: 55%;
+  }
+
+  #Fak, #Rub {
+    height: 200px;
+  }
+
+  #navRight {
+    position: fixed;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+
+
+
+}
   
   #profileIMG {
     width: 80%;
@@ -123,7 +221,9 @@ body.HOME {
 
   #navLeft {
     left: 0;
+    margin: auto;
   }
+  
   #navRight {
     right: 0;
     background-color: white;
@@ -139,6 +239,8 @@ body.HOME {
     border-radius: 30px;
     padding: 0;
     float: left;
+    margin: 1rem;
+
   }
 
   .picCom {
@@ -151,16 +253,16 @@ body.HOME {
 
   .plus {
     float: right; 
-    margin-top: 20%;
   }
 
   .photoCol {
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
     float: left;
     margin-left: 10%;
     margin-left: 5%;
+    object-fit: cover;
   }
 
   /* NAV LEFT */
@@ -188,20 +290,27 @@ body.HOME {
       margin-top: 5%;
     }
 
-    /* right */
 
+    #Get {
+      bottom: 0;
+      background: linear-gradient(to bottom,#F87880, #ff0000);
+      color: #ffffff;
+      border-radius: 10px;
+      cursor: pointer;
+      border-color: transparent;
+      width: 100%;
+    }
+
+    /* right */
   
 
     hr {
       width: 80%;
-      margin: auto;
+      
     }
 
     
-    #Fak, #Rub {
-      height: 250px;
-    }
-
+    
     #view {
       float: right;
       color: #00000093;
@@ -221,4 +330,5 @@ body.HOME {
     body.HOME::-webkit-scrollbar-thumb:hover {
       background-color: #d5000b;
     }
-    
+
+  

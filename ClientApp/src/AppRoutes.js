@@ -23,7 +23,7 @@ const AppRoutes = [
     element: <Status />
   },
   {
-    path: '/home',
+    path: '/Home',
     element: <Home />
   },
   {

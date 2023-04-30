@@ -1,16 +1,250 @@
 #navRightStatus {
     border-left: 0.1rem solid #8d8d8d36;
-    margin: auto;
     background-color: #8d8d8d13;
-    height: 100%;
+    height: 1180px;
   }
 
 body.Status {
   background-image: url('https://sv1.picz.in.th/images/2023/04/27/yZ7ifN.png');
-  
   font-family: "Mitr", sans-serif;
 }
 
 #navLeftStatus {
   margin-top: 3%;
 }
+
+
+
+/* toggle */
+
+.can-toggle {
+  position: relative;
+}
+.can-toggle *, .can-toggle *:before, .can-toggle *:after {
+  box-sizing: border-box;
+}
+.can-toggle input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.can-toggle input[type=checkbox][disabled] ~ label {
+  pointer-events: none;
+}
+.can-toggle input[type=checkbox][disabled] ~ label .can-toggle__switch {
+  opacity: 0.4;
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:before {
+  content: attr(data-unchecked);
+  left: 0;
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  content: attr(data-checked);
+}
+.can-toggle label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.can-toggle label .can-toggle__switch {
+  position: relative;
+}
+.can-toggle label .can-toggle__switch:before {
+  content: attr(data-checked);
+  position: absolute;
+  top: 0;
+  text-transform: uppercase;
+  text-align: center;
+}
+.can-toggle label .can-toggle__switch:after {
+  content: attr(data-unchecked);
+  position: absolute;
+  z-index: 5;
+  text-transform: uppercase;
+  text-align: center;
+  background: #FF0000;
+  transform: translate3d(0, 0, 0);
+}
+
+.can-toggle label .can-toggle__label-text {
+  flex: 1;
+}
+
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  transform: translate3d(65px, 0, 0);
+}
+
+.can-toggle label {
+  font-size: 16px;
+}
+.can-toggle label .can-toggle__switch {
+  height: 36px;
+  flex: 0 0 134px;
+  border-radius: 10px;
+  
+}
+.can-toggle label .can-toggle__switch:before {
+  left: 67px;
+  font-size: 12px;
+  line-height: 36px;
+  width: 67px;
+  padding: 0 12px;
+}
+.can-toggle label .can-toggle__switch:after {
+  top: 2px;
+  left: 2px;
+  border-radius: 10px;
+  width: 65px;
+  line-height: 32px;
+  font-size: 12px;
+}
+
+.can-toggle.demo-rebrand-1 input[type=checkbox]:checked ~ label .can-toggle__switch {
+  background-color: #ffffff;
+  
+}
+.can-toggle.demo-rebrand-1 input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  color: #ffffff;
+  
+}
+
+.can-toggle.demo-rebrand-1 label .can-toggle__label-text {
+  flex: 1;
+  
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__switch {
+  transition: background-color 0.3s ease-in-out;
+  background: #ffffff;
+  
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__switch:before {
+  color: #000000;
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__switch:after {
+  transition: transform 0.3s ease-in-out;
+  color: #ffffff;
+}
+
+
+
+
+/* xs */
+@media (max-width: 375px) {
+
+
+  #toggleContentRub,#toggleContentFak { 
+      height: 600px;
+    }
+
+    #Headd,#Sub,#Headd2,#Sub2 {
+      font-size: 14px;
+    }
+
+
+}
+
+
+  /* md ipad */
+  @media (max-width: 991px) and (min-width: 768px ) {
+
+    #navRightStatus {
+      position: fixed;
+      right: 0;
+    }
+
+    #toggleContentRub,#toggleContentFak { 
+      height: 600px;
+    }
+
+    
+#navLeftStatus {
+  left: 0;
+  position: fixed;
+}
+
+#Headd,#Sub,#Headd2,#Sub2 {
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 18px;
+}
+
+  }
+
+   /* lg */
+   @media (max-width: 1199px) and (min-width: 992px ) {
+
+    #navRightStatus {
+      position: fixed;
+      right: 0;
+    }
+    #navLeftStatus {
+      left: 0;
+      position: fixed;
+    }
+
+    #toggleContentRub,#toggleContentFak { 
+      height: 600px;
+    }
+
+    #Headd,#Sub,#Headd2,#Sub2 {
+      padding-left: 5%;
+      padding-right: 5%;
+      font-size: 14px;
+    }
+
+   }
+  
+    /* xl */
+  @media (max-width: 1399px) and (min-width: 1200px ) {
+ 
+
+    #navRightStatus {
+      position: fixed;
+      right: 0;
+    }
+    #navLeftStatus {
+      left: 0;
+      position: fixed;
+    }
+    #toggleContentRub,#toggleContentFak { 
+      height: 600px;
+    }
+  }
+
+   /* xxl */
+  @media (min-width: 1400px ) {
+
+    #navRightStatus {
+      position: fixed;
+      right: 0;
+    }
+    #navLeftStatus {
+      left: 0;
+      position: fixed;
+    }
+
+    #toggleContentRub,#toggleContentFak { 
+      height: 600px;
+      
+    }
+
+    #Headd,#Sub,#Headd2,#Sub2 {
+      padding-left: 5%;
+      padding-right: 5%;
+      font-size: 22px;
+    }
+
+    #confirmBUTTON {
+      font-size: 16px;
+    }
+    
+
+}
+
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Navbar, NavbarBrand, NavbarToggler} from 'reactstrap';
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -40,7 +40,7 @@ export class Login extends Component {
                         <input type="password" placeholder="" />
                     </form>
                     <button class= "START">
-                        <Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/Home" style={{ textDecoration: 'none', color: 'inherit' }}>
                             Let's Start
                         </Link>
                     </button>
