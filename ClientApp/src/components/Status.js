@@ -6,8 +6,8 @@ import { NavItem, NavLink } from 'reactstrap';
 import './Status.css';
 import './Home.css';
 
-import StatusRubFak from "./StatusRubFak";
-import StatusDataRubfak from "./StatusDataRubfak";
+import StatusFak from "./StatusFak";
+import StatusDatafak from "./StatusDataFak";
 
 import StatusRub from "./StatusRub";
 import StatusDataRub from "./StatusDataRub";
@@ -57,7 +57,7 @@ export class Status extends Component {
 
   render() {
     return (
-      <div id="content" class="container-fluid">
+      <div id="content" class="container">
 
         <div class="row">
           <div class="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeftStatus">
@@ -81,10 +81,10 @@ export class Status extends Component {
             <div class='row'>
 
               <div class="can-toggle demo-rebrand-1">
-                <div class='p-2 mt-5'> <h2><b>รายการรับฝาก</b></h2> </div>
+                <div class='p-2 mt-5'> <h2><b>รายการของฉัน</b></h2> </div>
                 <div class='p-2 mb-5'> <input id="d" type="checkbox" ></input>
                   <label for="d">
-                    <div class="can-toggle__switch" data-checked="รับฝาก" data-unchecked="รอรับ"></div>
+                    <div class="can-toggle__switch" data-checked="สั่งซื้อ" data-unchecked="ฝากซื้อ"></div>
                   </label>
                 </div>
               </div>
@@ -94,7 +94,7 @@ export class Status extends Component {
 
               <div style={{ padding:0, borderRadius: '30px', width: '98%' }} class='bg-white m-auto' id="toggleContentRub">
                 <div class="col-12 px-4 py-4 h3">
-                  <b>รับฝาก</b>
+                  <b>ฝากซื้อ</b>
                 </div>
                 <div style={{ backgroundColor: '#F7F7F7'}} id='Headd' class='row py-2 h5 m-auto'>
 
@@ -118,8 +118,8 @@ export class Status extends Component {
 
                 <div id='Sub2' class='row text-left py-4 h6 m-auto bg-white'>
 
-                  {StatusDataRubfak.map((data) => (
-                    <StatusRubFak key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} />
+                  {StatusDatafak.map((data) => (
+                    <StatusFak key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Tel={data.Tel} Color={data.Color} />
                   ))}
 
                 </div>
@@ -130,7 +130,7 @@ export class Status extends Component {
 
               <div style={{ padding:0, borderRadius: '30px', width: '98%' }} class='bg-white m-auto' id="toggleContentFak">
                 <div class="col-12 px-4 py-4 h3">
-                  <b>รอรับ</b>
+                  <b>สั่งซื้อ</b>
                 </div>
                 <div style={{ backgroundColor: '#F7F7F7'}} id='Headd2' class='row py-2 h5 m-auto'>
 
@@ -155,7 +155,7 @@ export class Status extends Component {
                 <div id='Sub' class='row text-left py-4 h6 m-auto bg-white'>
 
                 {StatusDataRub.map((data) => (
-                    <StatusRub key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Color={data.Color} />
+                    <StatusRub key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Color={data.Color} Tel={data.Tel} />
                 ))}
 
                 </div>

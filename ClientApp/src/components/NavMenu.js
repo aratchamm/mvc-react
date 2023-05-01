@@ -7,7 +7,7 @@ import './NavMenu.css';
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -16,7 +16,7 @@ export class NavMenu extends Component {
     };
   }
 
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     });
@@ -25,15 +25,32 @@ export class NavMenu extends Component {
   render() {
     return (
       <header>
-        <Navbar className="navbar-expand-sm fixed-top navbar-toggleable-sm bg-white border-bottom box-shadow mb-3" container-fuild light>
-        <NavbarBrand tag={Link} to="/Home"><img src="https://sv1.picz.in.th/images/2023/04/08/mlIkAa.png" alt="logo.png" border="0" Link='/Home'
-                        width="100px" /></NavbarBrand>
-          <button type="button" style={{margin: 0}} class="icon-button">
-              <span class="material-icons">notifications</span>
-              <span class="icon-button__badge">2</span>
-            </button>
-          
-        </Navbar>
+       <Navbar className="navbar-expand-sm fixed-top navbar-toggleable-sm bg-white border-bottom box-shadow mb-3" container-fuild light>
+  <NavbarBrand tag={Link} to="/Home">
+    <img src="https://sv1.picz.in.th/images/2023/04/08/mlIkAa.png" alt="logo.png" border="0" width="100px" />
+  </NavbarBrand>
+
+  <Navbar className="ml-auto">
+    <NavItem>
+      <button type="button" className="icon-button" >
+        <span className="material-icons">notifications</span>
+        <span className="icon-button__badge">2</span>
+      </button>
+    </NavItem>
+
+    <NavItem>
+    <NavbarBrand tag={Link} to="/login">
+    <button tag={Link} to="/login" style={{marginLeft: '30px', border:'none', backgroundColor:'transparent'}}>
+        <i className="fas fa-sign-out-alt"></i> Logout
+      </button>
+  </NavbarBrand>
+      
+    </NavItem>
+  </Navbar>
+</Navbar>
+
+
+
       </header>
     );
   }

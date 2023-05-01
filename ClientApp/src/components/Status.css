@@ -91,7 +91,7 @@ body.Status {
 }
 .can-toggle label .can-toggle__switch:before {
   left: 67px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 36px;
   width: 67px;
   padding: 0 12px;
@@ -102,7 +102,7 @@ body.Status {
   border-radius: 10px;
   width: 65px;
   line-height: 32px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .can-toggle.demo-rebrand-1 input[type=checkbox]:checked ~ label .can-toggle__switch {
