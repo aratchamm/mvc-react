@@ -64,7 +64,7 @@ const Data = ({ imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header }) => {
             <div class="popup1">
               <img class="imgstyle"
                 src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg" alt=""></img>
-              <a class="close my-1 mx-2" href="/Home"><img border="0" alt="" src="https://sv1.picz.in.th/images/2023/04/28/ygp9r1.png"></img></a>
+              <a class="close my-1 mx-2" onClick={togglePopup}><img border="0" alt="" src="https://sv1.picz.in.th/images/2023/04/28/ygp9r1.png"></img></a>
               <div style={{margin: '2%'}} class="content">
                 <form class="px-5" action="">
                   <p class="h5 p-2 c" for="fname">ชื่ออาหาร</p>

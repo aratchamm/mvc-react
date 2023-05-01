@@ -7,6 +7,14 @@ import './NavMenu.css';
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
+  state = {
+    showPopup: false
+  };
+
+  togglePopup = () => {
+    this.setState({ showPopup: !this.state.showPopup });
+  };
+
   constructor(props) {
     super(props);
 
@@ -32,7 +40,7 @@ export class NavMenu extends Component {
 
   <Navbar className="ml-auto">
     <NavItem>
-      <button type="button" className="icon-button" >
+      <button onClick={this.togglePopup} type="button" className="icon-button" >
         <span className="material-icons">notifications</span>
         <span className="icon-button__badge">2</span>
       </button>
@@ -48,6 +56,21 @@ export class NavMenu extends Component {
     </NavItem>
   </Navbar>
 </Navbar>
+
+
+{this.state.showPopup && (
+
+<div id="popup" class="overlay">
+
+    <div class="popup">
+        <div class="h2 py-2"><b>data</b></div>
+        <div class="content">
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</div>
+)}
 
 
 

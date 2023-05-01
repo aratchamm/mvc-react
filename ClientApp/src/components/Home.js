@@ -133,12 +133,12 @@ export class Home extends Component {
 
         {this.state.showPopup && (
 
-          <div id="popup1" class="overlay">
-            <div class="popup1">
-              <a class="close my-1 mx-2" href="/Home">
+          <div id="popup2" class="overlay">
+            <div class="popup2">
+              <a class="close m-3" onClick={this.togglePopup}>
                 <img border="0" alt="" src="https://sv1.picz.in.th/images/2023/05/01/yqEb4J.png"></img>
               </a>
-              <div class="h2 py-4 "><b>หิวไหม?</b></div>
+              <div class="h2 pt-2 pb-4 "><b>หิวไหม?</b></div>
               <div>
                 <div class="row  text-center">
 
@@ -211,7 +211,7 @@ export class Home extends Component {
               </div>
               <br></br>
               <div class='h4 p-4 text-center'>
-                <input style={{backgroundColor: '#ff000d'}}  class="button1 p-3 " type="submit" value="POST" href="/Home"></input>
+                <input onClick={this.togglePopup} style={{backgroundColor: '#ff000d'}}  class="button1 p-3 " type="submit" value="POST" ></input>
               </div>
             </div>
           </div>
