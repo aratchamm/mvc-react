@@ -55,6 +55,8 @@ export class Status extends Component {
   }
 
 
+
+
   render() {
     return (
       <div id="content" class="container">
@@ -103,7 +105,7 @@ export class Status extends Component {
                       <b>สถานะ</b>
                     </div>
                     <div class="col-3 py-2 ">
-                      <b>ชื่อผู้รับ</b>
+                      <b>ชื่อและเบอร์ผู้รับ</b>
                     </div>
                     <div class="col-3 py-2 ">
                       <b>ชื่ออาหาร</b>
@@ -139,7 +141,7 @@ export class Status extends Component {
                       <b>สถานะ</b>
                     </div>
                     <div class="col-3 py-2 ">
-                      <b>ชื่อผู้รับ</b>
+                      <b>ชื่อและเบอร์ผู้รับ</b>
                     </div>
                     <div class="col-3 py-2 ">
                       <b>ชื่ออาหาร</b>

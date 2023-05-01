@@ -28,7 +28,7 @@ export class Home extends Component {
   }
 
   state = {
-    showPopup: false,
+    showPopup: false
   };
 
   togglePopup = () => {
@@ -135,48 +135,88 @@ export class Home extends Component {
 
           <div id="popup1" class="overlay">
             <div class="popup1">
-              <img class="imgstyle"
-                src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg" alt=""></img>
-              <a class="close my-1 mx-2" href="/Home"><img border="0" alt="" src="https://sv1.picz.in.th/images/2023/04/28/ygp9r1.png"></img></a>
-              <div style={{margin: '2%'}} class="content">
-                <form class="px-5" action="">
-                  <p class="h5 p-2 c" for="fname">ชื่ออาหาร</p>
-                  <input style={{width: '98%'}} class="p-2 h6 d-block m-auto" type="text" id="fname" name="fname" placeholder="ตัวอย่าง ข้าวผัดกระเทียม"></input>
-                  <p class="h5 px-2 pt-4 pb-2 c" for="note">หมายเหตุ (ถ้ามี)</p>
-                  <input style={{width: '98%'}} class="p-2 h6 d-block m-auto" type="text" id="note" name="note" placeholder="ตัวอย่าง ไม่ใส่ผัก"></input>
-                </form>
-                <div class="row pt-4">
-                  <div class="col-sm-5 col-lg-5 text-center h4 m-auto">
-                    <div class="row">
+              <a class="close my-1 mx-2" href="/Home">
+                <img border="0" alt="" src="https://sv1.picz.in.th/images/2023/05/01/yqEb4J.png"></img>
+              </a>
+              <div class="h2 py-4 "><b>หิวไหม?</b></div>
+              <div>
+                <div class="row  text-center">
 
-                      <div class="col-4">
-                      <button onClick={this.decrementCounter}>-</button>
-                      
-                      </div>
+                  <div class="col-2 h4  m-auto">
+                    <img src="https://sv1.picz.in.th/images/2023/05/01/yqEkPk.png" ></img>
 
-                      <div class="col-4 text-center">
-                      {this.state.currentCount}
-                      </div>
-
-                      <div class="col-4">
-                      <button onClick={this.incrementCounter}>+</button>
-                      </div>
-
-                    
-
-        
-        
-
-                    </div>
-                    
                   </div>
-                  <div class="col-sm-7 col-lg-7">
-                  <input class="button1 h4 p-3" type="submit" value="ฝากเลย"></input>
+
+                  <div class="col-2 h5 m-auto text-center" for="chooseAmount">จำนวน</div>
+
+                  <div class="col-2 h4 ml-5 my-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounter}>-</button>
+
                   </div>
+
+                  <div class="col-2 h3 m-auto text-center">
+                    {this.state.currentCount}
+                  </div>
+
+                  <div class="col-2 h4 m-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounter}>+</button>
+                  </div>
+
+                  <div class="col-2 h5 m-auto">ชิ้น</div>
+
+
+
+
                 </div>
+
+                <div class="row mt-4 text-center">
+
+                  <div class="col-2 h4  m-auto">
+                    <img src="https://sv1.picz.in.th/images/2023/05/01/yqEhKl.png"></img>
+
+                  </div>
+
+                  <div class="col-2 h5 m-auto text-center" for="chooseAmount">เวลา</div>
+
+                  <div class="col-2 h4 ml-5 my-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounter}>-</button>
+
+                  </div>
+
+                  <div class="col-2 h3 m-auto text-center">
+                    {this.state.currentCount}
+                  </div>
+
+                  <div class="col-2 h4 m-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounter}>+</button>
+                  </div>
+
+                  <div class="col-2 h5 m-auto">
+                    <select style={{ borderWidth: '2px' }} id="chooseTime">
+                      <option value="sec">วินาที</option>
+                      <option value="min" selected>นาที</option>
+                      <option value="hr">ชั่วโมง</option>
+                    </select>
+                  </div>
+
+
+
+
+
+
+                </div>
+
+              </div>
+              <div>
+              </div>
+              <br></br>
+              <div class='h4 p-4 text-center'>
+                <input style={{backgroundColor: '#ff000d'}}  class="button1 p-3 " type="submit" value="POST" href="/Home"></input>
               </div>
             </div>
           </div>
+
+
         )}
 
 

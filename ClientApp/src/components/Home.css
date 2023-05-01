@@ -335,7 +335,6 @@ body.HOME {
   .button1 {
   width: 90%;
   border: none;
-  background-color: #ff000d;
   color: #fff;
   border-radius: 10px;
   font-weight: bold;
@@ -391,8 +390,8 @@ body.HOME {
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
+  z-index: 1000;
 }
-
 
 .popup1 {
 
@@ -420,7 +419,7 @@ body.HOME {
   background: #fff;
   border-radius: 30px;
   width: 480px;
-  height: 380px;
+  height: 180px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -441,8 +440,8 @@ body.HOME {
   background: #fff;
   border-radius: 30px;
   width: 480px;
-  height: 280px;
-  position: fixed;
+  height: 250px;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -457,7 +456,7 @@ body.HOME {
   -o-transition: all 5s ease-in-out;
 }
 
-.popup1 .popup2 .popup3{
+.popup1 .popup2{
   position: absolute;
   transition: all 200ms;
   width: 30px;
@@ -465,10 +464,6 @@ body.HOME {
   float: right;
   cursor: pointer;
   text-decoration: none;
-}
-
-.popup1 .popup2 .popup3 .close:hover {
-  color: #d64807;
 }
 
 
@@ -494,16 +489,6 @@ form input[type="text"]{
   -o-border-radius: 40px;
 }
 
-p.a{
-  text-align: center;
-  color: #000000;
-}
-p.b{
-  color: rgb(0, 0, 0);
-}
-p.c{
-  color: rgb(0, 0, 0);
-}
 
 @media screen {
   .box {
