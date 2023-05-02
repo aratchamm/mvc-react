@@ -28,39 +28,63 @@ export class Home extends Component {
   }
 
   state = {
-    showPopup: false
+    showPopup: false,
+    currentCountNum: 0,
+    currentCountTime: 0
   };
 
   togglePopup = () => {
-    this.setState({ showPopup: !this.state.showPopup });
+    this.setState({ showPopup: !this.state.showPopup, currentCountNum: 0, currentCountTime: 0 });
   };
 
   constructor(props) {
     super(props);
-    this.state = { currentCount: 0 };
-    this.incrementCounter = this.incrementCounter.bind(this);
-    this.decrementCounter = this.decrementCounter.bind(this);
+    this.state = { currentCountNum: 0, currentCountTime: 0 };
+    this.incrementCounterNum = this.incrementCounterNum.bind(this);
+    this.decrementCounterNum = this.decrementCounterNum.bind(this);
+    this.incrementCounterTime = this.incrementCounterTime.bind(this);
+    this.decrementCounterTime = this.decrementCounterTime.bind(this);
   }
 
-  incrementCounter() {
+  incrementCounterNum() {
     this.setState({
-      currentCount: this.state.currentCount + 1
+      currentCountNum: this.state.currentCountNum + 1
     });
   }
 
-  decrementCounter() {
+  decrementCounterNum() {
+    if (this.state.currentCountNum > 0) {
+      this.setState({
+        currentCountNum: this.state.currentCountNum - 1
+      })
+    }
+    ;
+  }
+
+  incrementCounterTime() {
     this.setState({
-      currentCount: this.state.currentCount - 1
+      currentCountTime: this.state.currentCountTime + 1
     });
+  }
+
+  decrementCounterTime() {
+    if (this.state.currentCountTime > 0) {
+      this.setState({
+        currentCountTime: this.state.currentCountTime - 1
+      })
+    }
+    ;
   }
 
 
   render() {
-    return (
-      <div id="content" class="container-fluid">
 
-        <div class="row">
-          <div class="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeft">
+
+    return (
+      <div id="content" className="container-fluid">
+
+        <div className="row">
+          <div className="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeft">
             {DataProfile.map((data) => (
               <Profile key={data.id} imgSrc={data.imgSrc} name={data.name} tel={data.tel} />
             ))}
@@ -71,24 +95,24 @@ export class Home extends Component {
                 <NavLink tag={Link} id="HomeButton" className="text-dark" to="/Home"><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png" alt='iconHome'></img><b>Home</b></h3></NavLink>
               </NavItem>
               <NavItem>
-                <div class="opacity-50"><NavLink tag={Link} id="StatusButton" to="/Status"><h3><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png" alt='iconStatus'></img><b>Status</b></h3></NavLink></div>
+                <div className="opacity-50"><NavLink tag={Link} id="StatusButton" to="/Status"><h3><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png" alt='iconStatus'></img><b>Status</b></h3></NavLink></div>
               </NavItem>
             </ul>
 
 
           </div>
-          <div class="col-12 col-sm-6 col-lg-8" id="navCenter">
+          <div className="col-12 col-sm-6 col-lg-8" id="navCenter">
             {DataCard.map((data) => (
-              <Card key={data.id} imgCilentSrc={data.imgCilentSrc} imgCilentSrc2={data.imgCilentSrc2} imgCilentSrc3={data.imgCilentSrc3} Header={data.Header} />
+              <Card key={data.id} imgRiderSrc={data.imgRiderSrc} imgCilentSrc={data.imgCilentSrc} imgCilentSrc2={data.imgCilentSrc2} imgCilentSrc3={data.imgCilentSrc3} Header={data.Header} />
             ))}
           </div>
 
-          <div class="col-12 col-sm-3 col-lg-2 text-left" id="navRight">
-            <div class="px-2 pb-3 h2"><b>รายการของฉัน</b></div>
+          <div className="col-12 col-sm-3 col-lg-2 text-left" id="navRight">
+            <div className="px-2 pb-3 h2"><b>รายการของฉัน</b></div>
             <hr></hr>
             <div id="Fak">
-              <div class="row p-1 mt-5 mb-4">
-                <div class="col-12 h3 my-auto">
+              <div className="row p-1 mt-5 mb-4">
+                <div className="col-12 h3 my-auto">
                   ฝากซื้อ
                 </div>
               </div>
@@ -97,7 +121,7 @@ export class Home extends Component {
                 <RubFak key={data.id} Status={data.Status} Menu={data.Menu} Color={data.Color} />
               ))}
 
-              <div class="col-12 h6 p-2 my-auto">
+              <div className="col-12 h6 p-2 my-auto">
                 <a href='/Status' id="view"><i>view all >></i></a>
               </div>
 
@@ -105,8 +129,8 @@ export class Home extends Component {
             </div>
 
             <div id="Rub">
-              <div class="row p-1 mt-5 mb-4">
-                <div class="col-12 h3 m-auto text-left">
+              <div className="row p-1 mt-5 mb-4">
+                <div className="col-12 h3 m-auto text-left">
                   สั่งซื้อ
                 </div>
 
@@ -116,14 +140,14 @@ export class Home extends Component {
                 <Rub key={data.id} Status={data.Status} Menu={data.Menu} Color={data.Color} />
               ))}
 
-              <div class="col-12 h6 p-2 my-auto">
+              <div className="col-12 h6 p-2 my-auto">
                 <a href='/Status' id="view"><i>view all >></i></a>
               </div>
 
             </div>
 
-            <div class="mx-auto text-center">
-              <button onClick={this.togglePopup} class="h5 py-3 my-5" id="Get">ทำการสั่งอาหาร</button>
+            <div className="mx-auto text-center">
+              <button onClick={this.togglePopup} className="h5 py-3 my-5" id="Get">สร้างรายการสั่งซื้อ</button>
             </div>
 
           </div>
@@ -133,66 +157,66 @@ export class Home extends Component {
 
         {this.state.showPopup && (
 
-          <div id="popup2" class="overlay">
-            <div class="popup2">
-              <a class="close m-3" onClick={this.togglePopup}>
+          <div id="popup2" className="overlay">
+            <div className="popup2">
+              <a className="close m-3" onClick={this.togglePopup}>
                 <img border="0" alt="" src="https://sv1.picz.in.th/images/2023/05/01/yqEb4J.png"></img>
               </a>
-              <div class="h2 pt-2 pb-4 "><b>หิวไหม?</b></div>
-              <div>
-                <div class="row  text-center">
+              <div className="h2 pt-2 pb-4 "><b>หิวไหม?</b></div>
+              <div className="row px-1 text-center">
+                <div className="row text-center">
 
-                  <div class="col-2 h4  m-auto">
+                  <div className="col-2 h4  m-auto">
                     <img src="https://sv1.picz.in.th/images/2023/05/01/yqEkPk.png" ></img>
 
                   </div>
 
-                  <div class="col-2 h5 m-auto text-center" for="chooseAmount">จำนวน</div>
+                  <div className="col-2 h5 m-auto text-center" for="chooseAmount">จำนวน</div>
 
-                  <div class="col-2 h4 ml-5 my-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounter}>-</button>
+                  <div className="col-2 h4 ml-5 my-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounterNum}>-</button>
 
                   </div>
 
-                  <div class="col-2 h3 m-auto text-center">
-                    {this.state.currentCount}
+                  <div className="col-2 h3 m-auto text-center">
+                    {this.state.currentCountNum}
                   </div>
 
-                  <div class="col-2 h4 m-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounter}>+</button>
+                  <div className="col-2 h4 m-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounterNum}>+</button>
                   </div>
 
-                  <div class="col-2 h5 m-auto">ชิ้น</div>
+                  <div className="col-2 h5 m-auto">ชิ้น</div>
 
 
 
 
                 </div>
 
-                <div class="row mt-4 text-center">
+                <div className="row pt-4 text-center">
 
-                  <div class="col-2 h4  m-auto">
+                  <div className="col-2 h4  m-auto">
                     <img src="https://sv1.picz.in.th/images/2023/05/01/yqEhKl.png"></img>
 
                   </div>
 
-                  <div class="col-2 h5 m-auto text-center" for="chooseAmount">เวลา</div>
+                  <div className="col-2 h5 m-auto text-center" for="chooseAmount">เวลา</div>
 
-                  <div class="col-2 h4 ml-5 my-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounter}>-</button>
+                  <div className="col-2 h4 ml-5 my-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounterTime}>-</button>
 
                   </div>
 
-                  <div class="col-2 h3 m-auto text-center">
-                    {this.state.currentCount}
+                  <div className="col-2 h3 m-auto text-center">
+                    {this.state.currentCountTime}
                   </div>
 
-                  <div class="col-2 h4 m-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounter}>+</button>
+                  <div className="col-2 h4 m-auto">
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounterTime}>+</button>
                   </div>
 
-                  <div class="col-2 h5 m-auto">
-                    <select style={{ borderWidth: '2px' }} id="chooseTime">
+                  <div className="col-2 h5 m-auto">
+                    <select style={{ borderRadius: '20px', borderWidth: '2px', textAlign: 'center' }} id="chooseTime">
                       <option value="min" selected>นาที</option>
                       <option value="hr">ชั่วโมง</option>
                     </select>
@@ -210,7 +234,7 @@ export class Home extends Component {
               </div>
               <br></br>
               <div class='h4 p-4 text-center'>
-                <input onClick={this.togglePopup} style={{backgroundColor: '#ff000d'}}  class="button1 p-3 " type="submit" value="POST" ></input>
+                <input onClick={this.togglePopup} style={{backgroundColor: '#ff000d'}} id="POST" class="button1 p-3 " type="submit" value="POST" ></input>
               </div>
             </div>
           </div>

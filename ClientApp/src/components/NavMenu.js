@@ -15,6 +15,7 @@ export class NavMenu extends Component {
     this.setState({ showPopup: !this.state.showPopup });
   };
 
+
   constructor(props) {
     super(props);
 
@@ -31,18 +32,23 @@ export class NavMenu extends Component {
   }
 
   render() {
+
+    const buttonStyle = this.state.showPopup ? { color: '#ff0000' } : {};
+    const displayButton = this.state.showPopup ? { display: 'none' } : {};
+
     return (
+
       <header>
        <Navbar className="navbar-expand-sm fixed-top navbar-toggleable-sm bg-white border-bottom box-shadow mb-3" container-fuild light>
   <NavbarBrand tag={Link} to="/Home">
     <img src="https://sv1.picz.in.th/images/2023/04/08/mlIkAa.png" alt="logo.png" border="0" width="100px" />
   </NavbarBrand>
 
-  <Navbar className="ml-auto">
+  <Navbar  className="ml-auto">
     <NavItem>
-      <button onClick={this.togglePopup} type="button" className="icon-button" >
+      <button style={buttonStyle} onClick={this.togglePopup} type="button" className="icon-button" >
         <span className="material-icons">notifications</span>
-        <span className="icon-button__badge">2</span>
+        <span style={displayButton} className="icon-button__badge">2</span>
       </button>
     </NavItem>
 
@@ -60,14 +66,9 @@ export class NavMenu extends Component {
 
 {this.state.showPopup && (
 
-<div id="popup" class="overlay">
-
-    <div class="popup">
-        <div id="popuptext" class="h2 py-2"><b>data</b></div>
-        <div class="content">
-            <div class="row">
-            </div>
-        </div>
+<div id="popup" className='overlay2'>
+    <div class="popup5">
+      <span class="popuptext" id="myPopup">A Simple Popup!</span>
     </div>
 </div>
 )}

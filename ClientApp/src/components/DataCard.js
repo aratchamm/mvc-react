@@ -1,12 +1,26 @@
-// cardData.js
+
+
+const urlList = [
+  'https://sv1.picz.in.th/images/2023/05/02/yjoLID.jpg',
+  'https://sv1.picz.in.th/images/2023/05/02/yjoLID.jpg',
+  'https://sv1.picz.in.th/images/2023/05/02/yjoLID.jpg',
+  'https://sv1.picz.in.th/images/2023/05/02/yjoLID.jpg'
+];
+const randomIndex = Math.floor(Math.random() * urlList.length);
+const randomUrl = urlList[randomIndex];
+
 const CardData = [
-    { id: 1,Header:"fsagsa" , imgCilentSrc: "https://i.pinimg.com/564x/f7/2d/e3/f72de35fb3f8690080cfdad5a54a0662.jpg", imgCilentSrc2: undefined },
-    { id: 2,Header:"fsagsa" , imgCilentSrc: "https://i.pinimg.com/564x/f7/2d/e3/f72de35fb3f8690080cfdad5a54a0662.jpg", imgCilentSrc2: "https://i.pinimg.com/564x/f7/2d/e3/f72de35fb3f8690080cfdad5a54a0662.jpg"},
-    { id: 3,Header:"fsagsa" , imgCilentSrc: "https://i.pinimg.com/564x/f7/2d/e3/f72de35fb3f8690080cfdad5a54a0662.jpg", imgCilentSrc2: "https://i.pinimg.com/564x/f7/2d/e3/f72de35fb3f8690080cfdad5a54a0662.jpg", imgCilentSrc3: "https://i.pinimg.com/564x/f7/2d/e3/f72de35fb3f8690080cfdad5a54a0662.jpg" },
-    { id: 4,Header:"fsagsa" , imgCilentSrc: undefined , imgCilentSrc2: undefined, imgCilentSrc3: undefined }
-    ,{ id: 3,Header:"fsagsa" , imgCilentSrc: undefined , imgCilentSrc2: undefined, imgCilentSrc3: undefined }
-  
-  ];
+  { 
+    id: 1,
+    Header: 'fsa',
+    imgRiderSrc: randomUrl,
+    imgCilentSrc: "https://sv1.picz.in.th/images/2023/05/03/yjef5a.jpg",
+    imgCilentSrc2: undefined 
+  }
+
+
+];
+
   
   
   export default CardData;

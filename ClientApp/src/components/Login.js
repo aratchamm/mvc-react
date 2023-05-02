@@ -27,23 +27,20 @@ export class Login extends Component {
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
         </Navbar>
 
-                <div style={{marginTop: "5%"}} class="image-container">
-                    <img src="https://sv1.picz.in.th/images/2023/04/17/mejP8k.png" alt="My Image" class="login_img"></img>
+                <div style={{marginTop: "5%"}} className="image-container">
+                    <img src="https://sv1.picz.in.th/images/2023/04/17/mejP8k.png" alt="My Image" className="login_img"></img>
                 </div>
-                <div class="wrapper">
+                <div className="wrapper">
 
 
                     <form>
-                        <label>USERNAME</label>
+                        <label >USERNAME</label>
                         <input type="email" placeholder="" />
                         <label>PASSWORD</label>
                         <input type="password" placeholder="" />
                     </form>
-                    <button class= "START">
-                        <Link to="/Home" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Let's Start
-                        </Link>
-                    </button>
+                    <Link style={{ textDecoration: 'none', color: 'inherit' }}  to="/Home"><button className= "START">Let's Start</button></Link>
+                    
 
                     <div className="not-member">
                         Don't have an account? <Link to="/signup">Create Account</Link>

@@ -95,28 +95,28 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
 
        {showPopupConfirm && (
 
-                <div id="popup4" class="overlay">
-                    <div class="popup4 h1 text-center">
-                    <i class="fa-solid fa-circle-check" style={{color: 'green'}}></i>
-                        <div class="h4 py-4"><b>คุณได้ทำการสั่งอาหารเรียบร้อยเเล้วค่ะ</b></div>
+                <div id="popup4" className="overlay">
+                    <div className="popup4 h1 text-center">
+                    <i className="fa-solid fa-circle-check" style={{color: 'green'}}></i>
+                        <div className="h4 py-4"><b>คุณได้ทำการสั่งอาหารเรียบร้อยเเล้ว</b></div>
                     </div>
                 </div>
             )}
 
 {showPopupCancel && (
 
-<div id="popup3" class="overlay">
-    <div class="popup3">
-        <a class="close my-1 mx-2" onClick={togglePopup_cencel}><img border="0" alt="" src="https://sv1.picz.in.th/images/2023/04/28/ygp9r1.png"></img></a>
-        <div class="h2 py-2"><b>คุณต้องการที่จะยกเลิกใช่หรือไม่?</b></div>
-        <div class="content">
-            <div class="row">
-                <div class="col-6 mt-3">
-                    <input style={{backgroundColor: '#ff000d'}} onClick={handleCancel}  class="button1 h4 p-3" type="submit" value="ใช่"></input>
+<div id="popup3" className="overlay">
+    <div className="popup3">
+        <a className="close my-1 mx-3" onClick={togglePopup_cencel}><img border="0" alt="" src="https://sv1.picz.in.th/images/2023/04/28/ygp9r1.png"></img></a>
+        <div className="h3 py-4"><b>คุณต้องการยกเลิกใช่หรือไม่?</b></div>
+        <div className="content">
+            <div className="row">
+                <div className="col-6 mt-3">
+                    <input style={{backgroundColor: '#ff000d'}} onClick={handleCancel}  className="button1 h4 p-3" type="submit" value="ใช่"></input>
                 </div>
 
-                <div class="col-6 mt-3">
-                    <input style={{backgroundColor: '#8E8E8E'}} onClick={togglePopup_cencel} class=" button1 h4 p-3" type="submit" value="ไม่"></input>
+                <div className="col-6 mt-3">
+                    <input style={{backgroundColor: '#8E8E8E'}} onClick={togglePopup_cencel} className=" button1 h4 p-3" type="submit" value="ไม่"></input>
                 </div>
             </div>
         </div>

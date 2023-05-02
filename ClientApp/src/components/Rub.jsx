@@ -2,11 +2,11 @@ import React from "react";
 
 const Data = ({ Status, Menu,Color }) => {
   return (
-    <div class="row p-1">
-      <div style={{color:Color}} class="col-5 h6 text-left">
+    <div className="row p-1">
+      <div style={{color:Color}} className="col-5 h6 text-left">
         {Status}
       </div>
-      <div class="col-7 h6 text-left">
+      <div className="col-7 h6 text-left">
         {Menu}
       </div>
     </div>

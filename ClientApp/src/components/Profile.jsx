@@ -2,13 +2,13 @@ import React from "react";
 
 const Data = ({ imgSrc, name, tel }) => {
   return (
-    <div class="Info">
+    <div className="Info">
       
               <img id="profileIMG" src={imgSrc}></img>
               <br /><br />
                 <p>
-                  <div class="p-2"><h3><b>{name}</b></h3></div>
-                  <div class="p-2"><h4>{tel}</h4></div>
+                  <div className="h3 p-2"><b>{name}</b></div>
+                  <div className="h4 p-2">{tel}</div>
                 </p>
     </div>
   );
