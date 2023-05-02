@@ -13,6 +13,14 @@ body.Status {
   margin-top: 3%;
 }
 
+@media (max-width: 375px) {
+
+  #navLeftStatus {
+    border-bottom: 0.1rem solid #8d8d8d36;
+    background-color: white;
+    border-radius: 20px;
+  }
+}
 
 
 /* toggle */

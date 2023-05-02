@@ -10,6 +10,8 @@ body.HOME {
 
   #navLeft {
     border-bottom: 0.1rem solid #8d8d8d36;
+    background-color: white;
+    border-radius: 20px;
   }
 
   .Info {
@@ -369,6 +371,7 @@ body.HOME {
   position: absolute;
   top: 0;
   right: 0;
+  cursor: pointer;
 }
 
 
@@ -413,6 +416,7 @@ body.HOME {
   -ms-transition: all 5s ease-in-out;
   -o-transition: all 5s ease-in-out;
 }
+
 
 .popup2 {
   padding: 2%;
@@ -508,3 +512,25 @@ form input[type="text"]{
   right: 5%;
 }
 
+
+
+.popup4 {
+  padding: 2%;
+  background: #fff;
+  border-radius: 30px;
+  width: 480px;
+  height: 180px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 5s ease-in-out;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  -webkit-transition: all 5s ease-in-out;
+  -moz-transition: all 5s ease-in-out;
+  -ms-transition: all 5s ease-in-out;
+  -o-transition: all 5s ease-in-out;
+}

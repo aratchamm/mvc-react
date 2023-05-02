@@ -63,7 +63,7 @@ export class NavMenu extends Component {
 <div id="popup" class="overlay">
 
     <div class="popup">
-        <div class="h2 py-2"><b>data</b></div>
+        <div id="popuptext" class="h2 py-2"><b>data</b></div>
         <div class="content">
             <div class="row">
             </div>

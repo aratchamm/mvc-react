@@ -91,9 +91,6 @@ export class Status extends Component {
                 </div>
               </div>
 
-
-
-
               <div style={{ padding:0, borderRadius: '30px', width: '98%' }} class='bg-white m-auto' id="toggleContentRub">
                 <div class="col-12 px-4 py-4 h3">
                   <b>ฝากซื้อ</b>

@@ -77,7 +77,7 @@ export class Home extends Component {
 
 
           </div>
-          <div class="col-12 col-sm-6 col-lg-8 text-center" id="navCenter">
+          <div class="col-12 col-sm-6 col-lg-8" id="navCenter">
             {DataCard.map((data) => (
               <Card key={data.id} imgCilentSrc={data.imgCilentSrc} imgCilentSrc2={data.imgCilentSrc2} imgCilentSrc3={data.imgCilentSrc3} Header={data.Header} />
             ))}
@@ -193,7 +193,6 @@ export class Home extends Component {
 
                   <div class="col-2 h5 m-auto">
                     <select style={{ borderWidth: '2px' }} id="chooseTime">
-                      <option value="sec">วินาที</option>
                       <option value="min" selected>นาที</option>
                       <option value="hr">ชั่วโมง</option>
                     </select>

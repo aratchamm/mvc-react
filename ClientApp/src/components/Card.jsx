@@ -23,7 +23,7 @@ const Data = ({ imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header }) => {
         className="picCom"
         src="https://www.workitdaily.com/media-library/man-updates-his-linkedin-profile.jpg?id=27003617"
       ></img>
-      <div className="p-2">
+      <div className="p-2 text-center">
         <h3>{Header}</h3>
       </div>
       <div className="container">
