@@ -108,31 +108,24 @@ function Status() {
             </NavItem>
           </ul>
 
-
         </div>
         <div className="col-12 col-sm-9 col-xs-9 col-lg-10 p-3" id="navRightStatus">
           <div className='row'>
-
             <div className="can-toggle demo-rebrand-1">
-              <div className='p-2 mt-5'> <h2><b>รายการของฉัน</b></h2> </div>
-              <div className='p-2 mb-5'> <input id="d" type="checkbox" ></input>
-                <label for="d">
-                  <div id="Toggle" onClick={toggleshow} className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
-                </label>
+              <div id ="Toggle20">
+                <div className='p-2 mt-5 mb-4'> <h2><b>รายการของฉัน</b></h2> </div>
+                  <div className='p-2'>
+                    <input id="d" type="checkbox" ></input>
+                      <label for="d">
+                        <div className='col-12 bg-white' id="Toggle" onClick={toggleshow} className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
+                      </label>
               </div>
+                </div>
             </div>
 
-
-
             {showFak &&
-
               <div style={{ padding: 0, borderRadius: '30px', width: '98%' }} className='bg-white m-auto' id="toggleContentRub">
-                <div className="col-12 px-4 py-4 h3">
-                  <b>ฝากซื้อ</b>
-                </div>
-                <div style={{ backgroundColor: '#F7F7F7' }} id='Headd' className='row py-2 h5 m-auto'>
-
-
+                <div style={{ backgroundColor: '' }} id='Headd' className='row py-2 h5 m-auto'>
                   <div className="col-3 py-2 ">
                     <b>สถานะ</b>
                   </div>
@@ -145,30 +138,18 @@ function Status() {
                   <div className="col-3 py-2 ">
                     <b>หมายเหตุ</b>
                   </div>
-
-
-
                 </div>
-
+                <div className='blank'>.</div>
                 <div id='Sub2' className='row text-left py-4 h6 m-auto bg-white'>
-
                   {StatusDatafak.map((data) => (
                     <StatusFak key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Tel={data.Tel} Color={data.Color} />
                   ))}
-
                 </div>
-
-
               </div>}
 
             {showRub &&
               <div style={{ padding: 0, borderRadius: '30px', width: '98%' }} className='bg-white m-auto' id="toggleContentFak">
-                <div className="col-12 px-4 py-4 h3">
-                  <b>รับฝาก</b>
-                </div>
-                <div style={{ backgroundColor: '#F7F7F7' }} id='Headd2' className='row py-2 h5 m-auto'>
-
-
+                <div style={{ backgroundColor: '' }} id='Headd2' className='row py-2 h5 m-auto'>
                   <div className="col-3 py-2 ">
                     <b>สถานะ</b>
                   </div>
@@ -181,33 +162,17 @@ function Status() {
                   <div className="col-3 py-2 ">
                     <b>หมายเหตุ</b>
                   </div>
-
-
-
                 </div>
-
+                <div className='m0 p0 blank'>.</div>
                 <div id='Sub' className='row text-left py-4 h6 m-auto bg-white'>
-
                   {StatusDataRub.map((data) => (
                     <StatusRub key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Color={data.Color} Tel={data.Tel} />
                   ))}
-
                 </div>
-
-
               </div>}
-
-
-
-
-
           </div>
-
         </div>
       </div>
-
-
-
     </div>
   );
 }
