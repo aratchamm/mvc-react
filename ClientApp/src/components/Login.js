@@ -8,6 +8,7 @@ import axios from 'axios';
 function Login(){
 
     useEffect(() => {
+        localStorage.clear();
         document.body.classList.add('LOGIN');
 
         return () => {
@@ -33,7 +34,11 @@ function Login(){
                     'Content-Type': 'application/json',
                 },
             })
-            navigate('/Home')
+
+            setTimeout(() => {
+                localStorage.setItem('token',res.data)
+                return navigate('/Home')
+            }, 1000)
         }
         catch(error){
             console.log("Username or Password Incorrect")
@@ -47,6 +52,14 @@ function Login(){
     return (
         <div>
     
+
+    <Navbar style={{padding:'0.7%'}} className="navbar-expand-sm fixed-top navbar-toggleable-sm bg-white border-bottom" container-fuild light>
+  <NavbarBrand style={{margin:'auto'}} tag={Link} to="/Home">
+    <img src="https://sv1.picz.in.th/images/2023/04/08/mlIkAa.png" alt="logo.png" border="0" width="100px" />
+  </NavbarBrand>
+
+</Navbar>
+
                     <div style={{marginTop: "5%"}} className="image-container">
                         <img src="https://sv1.picz.in.th/images/2023/04/17/mejP8k.png" alt="My Image" className="login_img"></img>
                     </div>

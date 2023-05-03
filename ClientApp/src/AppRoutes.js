@@ -1,7 +1,8 @@
-import { Home } from "./components/Home";
-import { Status } from "./components/Status";
+import Home from "./components/Home";
 import Login from "./components/Login";
-import { SignUp } from "./components/SignUp";
+import { Status } from "./components/Status";
+import SignUp from "./components/SignUp";
+
 
 const AppRoutes = [
   {

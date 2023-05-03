@@ -59,7 +59,7 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
             {showPopup && (
 
                 <div id="popup3" className="overlay">
-                    <div className="popup3">
+                    <div className="popup3 text-center">
                         <a className="close my-1 mx-2" onClick={togglePopup}><img border="0" alt="" src="https://sv1.picz.in.th/images/2023/04/28/ygp9r1.png"></img></a>
                         <div className="h3 py-4"><b>คุณต้องการยกเลิกใช่หรือไม่?</b></div>
                         <div className="content">

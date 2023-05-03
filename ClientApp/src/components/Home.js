@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect,useState } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
 import './Home.css';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Profile from "./Profile";
-import DataProfile from "./DataProfile";
+
 
 import Card from "./Card";
 import DataCard from "./DataCard";
@@ -14,70 +14,96 @@ import DataRubFak from "./DataFak";
 import Rub from "./Rub";
 import DataRub from "./DataRub";
 
-
-export class Home extends Component {
-  static displayName = Home.name;
+import axios from 'axios'
 
 
+function Home(){
+  const token=localStorage.getItem("token"); 
+  const [showPopup, SetShowPopup] = useState(false);
+  const [currentCountNum,SetcurrentCountNum] = useState(0);
+  const [currentCountTime,SetcurrentCountTime] = useState(0);
+  const [userProfile, setUserProfile] = useState({
+    id:"",
+    username:"",
+    password:"",
+    phone:"",
+    profileImgIndex: 0
+  });
+  const navigate = useNavigate();
 
-  componentDidMount() {
-    document.body.classList.add('HOME');
-  }
-  componentWillUnmount() {
-    document.body.className = '';
-  }
+  const urlList = [
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101111562250/Screenshot_2023-05-03_034232.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101363208263/Screenshot_2023-05-03_034032.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101652623420/Screenshot_2023-05-03_033834.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101916868688/Screenshot_2023-05-03_033742.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059102197874878/Screenshot_2023-05-03_033557.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059102466318446/Screenshot_2023-05-03_033236.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059102713786398/Screenshot_2023-05-03_032954.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059103011569714/Screenshot_2023-05-03_032459.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059103280013382/Screenshot_2023-05-03_032220.jpg'
+  ];
 
-  state = {
-    showPopup: false,
-    currentCountNum: 0,
-    currentCountTime: 0
+  useEffect(()=>{
+    function protectRoute(){
+      const token = localStorage.getItem("token");
+      if(!token){
+        
+        return navigate('/login');
+      }}
+    
+    async function fetchProfile(){
+        try{
+            const res = await axios({
+                url: 'https://localhost:7161' + '/api/User/GetUserById',
+                method: 'GET',
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                }
+            })
+            setUserProfile(res.data);
+        }
+        catch(error){
+            console.log("User NotFound");
+        }
+    }
+    fetchProfile();
+    protectRoute();
+
+      document.body.classList.add('HOME');
+
+      return () => {
+        document.body.classList.remove('HOME');
+      }
+  },[]);
+
+ function togglePopup() {
+    SetShowPopup(!showPopup);
+    if(showPopup==true){
+      SetcurrentCountNum(0);
+      SetcurrentCountTime(0);
+    }
   };
 
-  togglePopup = () => {
-    this.setState({ showPopup: !this.state.showPopup, currentCountNum: 0, currentCountTime: 0 });
-  };
 
-  constructor(props) {
-    super(props);
-    this.state = { currentCountNum: 0, currentCountTime: 0 };
-    this.incrementCounterNum = this.incrementCounterNum.bind(this);
-    this.decrementCounterNum = this.decrementCounterNum.bind(this);
-    this.incrementCounterTime = this.incrementCounterTime.bind(this);
-    this.decrementCounterTime = this.decrementCounterTime.bind(this);
+  function incrementCounterNum() {
+    SetcurrentCountNum(currentCountNum+1);
   }
 
-  incrementCounterNum() {
-    this.setState({
-      currentCountNum: this.state.currentCountNum + 1
-    });
+  function decrementCounterNum() {
+    if (currentCountNum > 0) {
+      SetcurrentCountNum(currentCountNum-1);
+    };
   }
 
-  decrementCounterNum() {
-    if (this.state.currentCountNum > 0) {
-      this.setState({
-        currentCountNum: this.state.currentCountNum - 1
-      })
-    }
-    ;
+  function increaseTime() {
+    SetcurrentCountTime(currentCountTime+1);
   }
 
-  incrementCounterTime() {
-    this.setState({
-      currentCountTime: this.state.currentCountTime + 1
-    });
+  function decreaseTime() {
+    if (currentCountTime > 0) {
+      SetcurrentCountTime(currentCountTime-1);
+    };
   }
-
-  decrementCounterTime() {
-    if (this.state.currentCountTime > 0) {
-      this.setState({
-        currentCountTime: this.state.currentCountTime - 1
-      })
-    }
-    ;
-  }
-
-
-  render() {
 
 
     return (
@@ -85,10 +111,7 @@ export class Home extends Component {
 
         <div className="row">
           <div className="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeft">
-            {DataProfile.map((data) => (
-              <Profile key={data.id} imgSrc={data.imgSrc} name={data.name} tel={data.tel} />
-            ))}
-
+              <Profile imgSrc={urlList[userProfile.profileImgIndex]} name={userProfile.username} tel={userProfile.phone} />
             <br />
             <ul className="navbar-nav flex-grow">
               <NavItem>
@@ -103,7 +126,7 @@ export class Home extends Component {
           </div>
           <div className="col-12 col-sm-6 col-lg-8" id="navCenter">
             {DataCard.map((data) => (
-              <Card key={data.id} imgRiderSrc={data.imgRiderSrc} imgCilentSrc={data.imgCilentSrc} imgCilentSrc2={data.imgCilentSrc2} imgCilentSrc3={data.imgCilentSrc3} Header={data.Header} />
+              <Card key={data.id} imgRiderSrc={data.imgRiderSrc} imgCilentSrc={data.imgCilentSrc} imgCilentSrc2={data.imgCilentSrc2} imgCilentSrc3={data.imgCilentSrc} Header={data.Header} />
             ))}
           </div>
 
@@ -147,7 +170,7 @@ export class Home extends Component {
             </div>
 
             <div className="mx-auto text-center">
-              <button onClick={this.togglePopup} className="h5 py-3 my-5" id="Get">สร้างรายการสั่งซื้อ</button>
+              <button onClick={togglePopup} className="h5 py-3 my-5" id="Get">สร้างรายการสั่งซื้อ</button>
             </div>
 
           </div>
@@ -155,11 +178,11 @@ export class Home extends Component {
         </div>
 
 
-        {this.state.showPopup && (
+        {showPopup && (
 
           <div id="popup2" className="overlay">
             <div className="popup2">
-              <a className="close m-3" onClick={this.togglePopup}>
+              <a className="close m-3" onClick={togglePopup}>
                 <img border="0" alt="" src="https://sv1.picz.in.th/images/2023/05/01/yqEb4J.png"></img>
               </a>
               <div className="h2 pt-2 pb-4 "><b>หิวไหม?</b></div>
@@ -174,16 +197,16 @@ export class Home extends Component {
                   <div className="col-2 h5 m-auto text-center" for="chooseAmount">จำนวน</div>
 
                   <div className="col-2 h4 ml-5 my-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounterNum}>-</button>
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={decrementCounterNum}>-</button>
 
                   </div>
 
                   <div className="col-2 h3 m-auto text-center">
-                    {this.state.currentCountNum}
+                    {currentCountNum}
                   </div>
 
                   <div className="col-2 h4 m-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounterNum}>+</button>
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={incrementCounterNum}>+</button>
                   </div>
 
                   <div className="col-2 h5 m-auto">ชิ้น</div>
@@ -203,16 +226,16 @@ export class Home extends Component {
                   <div className="col-2 h5 m-auto text-center" for="chooseAmount">เวลา</div>
 
                   <div className="col-2 h4 ml-5 my-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.decrementCounterTime}>-</button>
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={decreaseTime}>-</button>
 
                   </div>
 
                   <div className="col-2 h3 m-auto text-center">
-                    {this.state.currentCountTime}
+                    {currentCountTime}
                   </div>
 
                   <div className="col-2 h4 m-auto">
-                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={this.incrementCounterTime}>+</button>
+                    <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={increaseTime}>+</button>
                   </div>
 
                   <div className="col-2 h5 m-auto">
@@ -234,7 +257,7 @@ export class Home extends Component {
               </div>
               <br></br>
               <div class='h4 p-4 text-center'>
-                <input onClick={this.togglePopup} style={{backgroundColor: '#ff000d'}} id="POST" class="button1 p-3 " type="submit" value="POST" ></input>
+                <input onClick={togglePopup} style={{backgroundColor: '#ff000d'}} id="POST" class="button1 p-3 " type="submit" value="POST" ></input>
               </div>
             </div>
           </div>
@@ -249,5 +272,5 @@ export class Home extends Component {
 
 
     );
-  }
 }
+ export default Home;

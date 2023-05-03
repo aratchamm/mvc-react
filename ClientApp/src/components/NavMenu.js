@@ -54,7 +54,7 @@ export class NavMenu extends Component {
 
     <NavItem>
     <NavbarBrand tag={Link} to="/login">
-    <button tag={Link} to="/login" style={{marginLeft: '30px', border:'none', backgroundColor:'transparent'}}>
+    <button tag={Link} to="/login" onClick={()=>{localStorage.clear();}} style={{marginLeft: '30px', border:'none', backgroundColor:'transparent'}}>
         <i className="fas fa-sign-out-alt"></i> Logout
       </button>
   </NavbarBrand>

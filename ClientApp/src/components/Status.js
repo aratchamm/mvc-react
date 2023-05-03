@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Profile from "./Profile";
-import DataProfile from "./DataProfile";
 import { Link } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
 import './Status.css';
@@ -63,9 +62,7 @@ export class Status extends Component {
 
         <div className="row">
           <div className="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeftStatus">
-            {DataProfile.map((data) => (
-              <Profile key={data.id} imgSrc={data.imgSrc} name={data.name} tel={data.tel} />
-            ))}
+      
 
             <br />
             <ul className="navbar-nav flex-grow">
@@ -86,7 +83,7 @@ export class Status extends Component {
                 <div className='p-2 mt-5'> <h2><b>รายการของฉัน</b></h2> </div>
                 <div className='p-2 mb-5'> <input id="d" type="checkbox" ></input>
                   <label for="d">
-                    <div className="can-toggle__switch" data-checked="สั่งซื้อ" data-unchecked="ฝากซื้อ"></div>
+                    <div className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
                   </label>
                 </div>
               </div>
@@ -129,7 +126,7 @@ export class Status extends Component {
 
               <div style={{ padding:0, borderRadius: '30px', width: '98%' }} className='bg-white m-auto' id="toggleContentFak">
                 <div className="col-12 px-4 py-4 h3">
-                  <b>สั่งซื้อ</b>
+                  <b>รับฝาก</b>
                 </div>
                 <div style={{ backgroundColor: '#F7F7F7'}} id='Headd2' className='row py-2 h5 m-auto'>
 
