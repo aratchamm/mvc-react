@@ -122,7 +122,7 @@ function Signup()
           </form>
           <button onClick={SingUpHandler}
           className="CREATE">Create Account</button>
-          <div className="p-1 not-member"><h6>Already have an account?<Link to="/login"> Log in</Link></h6>
+          <div className="py-2 not-member"><h6>Already have an account?<Link to="/login"> Log in</Link></h6>
           </div>
         </div>
       </div>

@@ -36,9 +36,9 @@ body.SIGNUP {
   margin: 50px auto;
   max-width: 500px;
   max-height: 800px;
-  height: 400px;
+  height: 430px;
   margin-top: auto;
-  padding: 40px;
+  padding: 50px;
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 20px;
@@ -47,8 +47,8 @@ body.SIGNUP {
 /* CSS for form inputs */
 form label {
   display: block;
-  margin-bottom: 8px;
-  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-top: 40px;
   font-weight: bold;
  
 }
@@ -61,7 +61,7 @@ form input[type="text"]  {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 20px;
-  margin-bottom: -20px;
+  margin-bottom: -35px;
   margin-top: -30px;
 
 }
@@ -150,7 +150,7 @@ form input[type="text"]  {
   margin: 50px auto;
   max-width: 500px;
   max-height: 800px;
-  height: 500px;
+  height: 520px;
   margin-top: auto;
   padding: 40px;
   border: 1px solid #ddd;
