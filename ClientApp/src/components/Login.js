@@ -7,19 +7,20 @@ import axios from 'axios';
 
 function Login() {
 
-    const [showPopupConfirm, setShowPopupConfirm] = useState(false);
-
+    const [showPopupCorrect, setShowPopupCorrect] = useState(false);
+    const [showPopupIncorrect, setShowPopupIncorrect] = useState(false);
+    
     useEffect(() => {
         localStorage.clear();
         document.body.classList.add('LOGIN');
-      
+
         return () => {
             document.body.classList.remove('LOGIN');
         }
 
-      }, []);
-      
-          
+    }, []);
+
+
 
     const navigate = useNavigate();
     const [userLogin, setUserLogin] = useState({
@@ -40,11 +41,15 @@ function Login() {
                 },
             })
 
+
             setTimeout(() => {
                 localStorage.setItem('token', res.data)
-                setShowPopupConfirm(true);
+                setShowPopupCorrect(true);
+                setTimeout(() => {
+                    setShowPopupCorrect(false);
+                    navigate('/Home');
+                }, 2500);
 
-                return navigate('/Home')
             }, 1000)
         }
         catch (error) {
@@ -114,12 +119,22 @@ function Login() {
                 </div>
             </div>
 
-            {showPopupConfirm && (
+            {showPopupCorrect && (
 
                 <div id="popup4" className="overlay">
                     <div className="popup4 h1 text-center">
                         <i className="fa-solid fa-circle-check" style={{ color: 'green' }}></i>
-                        <div className="h4 py-4"><b>คุณได้ยืนยันออเดอร์แล้ว</b></div>
+                        <div className="h4 py-4"><b>Welcome to MEALMATE!</b></div>
+                    </div>
+                </div>
+            )}
+
+            {showPopupIncorrect && (
+
+                <div id="popup4" className="overlay">
+                    <div className="popup4 h1 text-center">
+                        <i className="fa-solid fa-circle-check" style={{ color: 'green' }}></i>
+                        <div className="h4 py-4"><b>Welcome to MEALMATE!</b></div>
                     </div>
                 </div>
             )}

@@ -55,6 +55,7 @@ function Signup()
       }
       catch(err){
         console.log("This username is already in use")
+        alert("This username is already in use")
       }
     }
   }
