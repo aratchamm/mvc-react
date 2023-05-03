@@ -1,6 +1,6 @@
 import Home from "./components/Home";
 import Login from "./components/Login";
-import { Status } from "./components/Status";
+import Status from "./components/Status";
 import SignUp from "./components/SignUp";
 
 

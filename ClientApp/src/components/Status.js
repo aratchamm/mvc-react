@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect } from 'react';
 import Profile from "./Profile";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
 import './Status.css';
 import './Home.css';
@@ -11,58 +11,85 @@ import StatusDatafak from "./StatusDataFak";
 import StatusRub from "./StatusRub";
 import StatusDataRub from "./StatusDataRub";
 
-
-export class Status extends Component {
-  static displayName = Status.name;
-
-  componentDidMount() {
-    document.body.classList.add('Status');
-    const toggleSwitch = document.querySelector('.can-toggle__switch');
-    const toggleContentRub = document.getElementById('toggleContentRub');
-    const toggleContentFak = document.getElementById('toggleContentFak');
-
-    toggleSwitch.addEventListener('click', () => {
-      if (toggleSwitch.classList.contains('active')) {
-        if (document.getElementById('d').checked) {
-          toggleContentFak.style.display = 'block';
-          toggleContentRub.style.display = 'none';
-        } else {
-          toggleContentFak.style.display = 'none';
-          toggleContentRub.style.display = 'block';
-        }
-      } else {
-        if (document.getElementById('d').checked) {
-          toggleContentFak.style.display = 'none';
-          toggleContentRub.style.display = 'block';
-        } else {
-          toggleContentFak.style.display = 'block';
-          toggleContentRub.style.display = 'none';
-        }
-      }
-    });
+import axios from 'axios';
 
 
 
+function Status() {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
-    // Set the initial display state of the content elements
-    toggleContentRub.style.display = 'block';
-    toggleContentFak.style.display = 'none';
+  const [showRub, setShowRub] = useState(true);
+  const [showFak, setShowFak] = useState(false);
+  
+  const [userProfile, setUserProfile] = useState({
+    id:"",
+    username:"",
+    password:"",
+    phone:"",
+    profileImgIndex: 0
+  });
+
+
+  const toggleshow = () => {
+    setShowFak(!showFak);
+    setShowRub(!showRub);
   }
 
-  componentWillUnmount() {
-    document.body.className = '';
-  }
+    const urlList = [
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101111562250/Screenshot_2023-05-03_034232.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101363208263/Screenshot_2023-05-03_034032.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101652623420/Screenshot_2023-05-03_033834.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059101916868688/Screenshot_2023-05-03_033742.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059102197874878/Screenshot_2023-05-03_033557.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059102466318446/Screenshot_2023-05-03_033236.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059102713786398/Screenshot_2023-05-03_032954.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059103011569714/Screenshot_2023-05-03_032459.jpg',
+    'https://cdn.discordapp.com/attachments/1093932914468720804/1103059103280013382/Screenshot_2023-05-03_032220.jpg'
+  ];
+
+ 
+
+  useEffect(() => {
+        
+         function protectRoute(){
+      const token = localStorage.getItem("token");
+      if(!token){
+        return navigate('/login');
+      }}
+       async function fetchProfile(){
+        try{
+            const res = await axios({
+                url: 'https://localhost:7161' + '/api/User/GetUserById',
+                method: 'GET',
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                }
+            })
+            setUserProfile(res.data);
+        }
+        catch(error){
+            console.log("User NotFound");
+        }
+    }
+    fetchProfile();
+      protectRoute()
+      document.body.classList.add('Status');
 
 
 
+        return () => {
+            document.body.classList.remove('Status');
+        }
+    }, [showFak, showRub]);
 
-  render() {
+
     return (
       <div id="content" className="container">
 
         <div className="row">
           <div className="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeftStatus">
-      
+              <Profile imgSrc={urlList[userProfile.profileImgIndex]} name={userProfile.username} tel={userProfile.phone} />
 
             <br />
             <ul className="navbar-nav flex-grow">
@@ -83,10 +110,14 @@ export class Status extends Component {
                 <div className='p-2 mt-5'> <h2><b>รายการของฉัน</b></h2> </div>
                 <div className='p-2 mb-5'> <input id="d" type="checkbox" ></input>
                   <label for="d">
-                    <div className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
+                    <div id="Toggle" onClick={toggleshow} className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
                   </label>
                 </div>
               </div>
+
+
+
+{showFak &&
 
               <div style={{ padding:0, borderRadius: '30px', width: '98%' }} className='bg-white m-auto' id="toggleContentRub">
                 <div className="col-12 px-4 py-4 h3">
@@ -121,9 +152,9 @@ export class Status extends Component {
                 </div>
 
 
-              </div>
+              </div>}
 
-
+{showRub &&
               <div style={{ padding:0, borderRadius: '30px', width: '98%' }} className='bg-white m-auto' id="toggleContentFak">
                 <div className="col-12 px-4 py-4 h3">
                   <b>รับฝาก</b>
@@ -157,7 +188,7 @@ export class Status extends Component {
                 </div>
 
 
-              </div>
+              </div>}
               
               
 
@@ -173,4 +204,5 @@ export class Status extends Component {
       </div>
     );
   }
-}
+
+export default Status;

@@ -17,7 +17,7 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
 
   const [cancelText, setCancelText] = useState("ยกเลิก");
   const [confirmText, setConfirmText] = useState("ยืนยัน");
-  const [closeOrderText, setcloseOrderText] = useState("ยืนยันการจัดส่ง");
+  const [closeOrderText, setcloseOrderText] = useState("จัดส่งแล้ว");
 
   const [statusColor, setStatusColor] = useState(StatusColor[Status]);
   const [statusText, setStatusText] = useState(Status);
@@ -38,13 +38,15 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
   }
 
     function handleClose() {
-    setShowButtons(false);
+    setcloseOrderButtons(false);
+    // ลบ data ทิ้ง
     setStatusText("ยืนยันแล้ว");
+    setStatusColor("green");
+    togglePopup_Close();
   }
 
   const togglePopup_cencel = () => {
     setShowPopupCancel(!showPopupCancel);
-     setShowButtons(false);
   }
 
   const togglePopup_Confirm = () => {
@@ -53,8 +55,7 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
   }
 
   const togglePopup_Close = () => {
-    setShowPopupConfirm(!showPopupClose);
-    setShowPopupClose(false);
+    setShowPopupClose(!showPopupClose);
   }
 
 useEffect(() => {
@@ -116,7 +117,7 @@ useEffect(() => {
                 style={{
                   borderRadius: "20px",
                   marginRight: "5px",
-                  backgroundColor: "green",
+                  backgroundColor: "#ff0000",
                   color: "white",
                   border: "0px",
                 }}
