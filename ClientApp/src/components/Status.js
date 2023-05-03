@@ -147,7 +147,7 @@ function Status() {
                     <b>สถานะ</b>
                   </div>
                   <div className="col-3 py-2 ">
-                    <b>ชื่อและเบอร์ผู้รับ</b>
+                    <b>ข้อมูลผู้ฝาก</b>
                   </div>
                   <div className="col-3 py-2 ">
                     <b>ชื่ออาหาร</b>
@@ -171,7 +171,7 @@ function Status() {
                     <b>สถานะ</b>
                   </div>
                   <div className="col-3 py-2 ">
-                    <b>ชื่อและเบอร์ผู้รับ</b>
+                    <b>ข้อมูลผู้รับ</b>
                   </div>
                   <div className="col-3 py-2 ">
                     <b>ชื่ออาหาร</b>

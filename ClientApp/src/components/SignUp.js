@@ -53,13 +53,11 @@ function Signup()
           }
         })
         console.log("Sign Up Successfully")
-        setTimeout(() => {
-          setShowPopupSuccessfully(true);
+        setShowPopupSuccessfully(true);
                 setTimeout(() => {
                   setShowPopupSuccessfully(false);
-                    return navigate('/Login');
                 }, 2500);
-            }, 1000)
+                return navigate('/login');
       }
       catch(err){
         console.log("This username is already in use")

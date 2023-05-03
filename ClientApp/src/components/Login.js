@@ -42,15 +42,13 @@ function Login() {
             })
 
 
+            localStorage.setItem('token', res.data)
+            setShowPopupCorrect(true);
             setTimeout(() => {
-                localStorage.setItem('token', res.data)
-                setShowPopupCorrect(true);
-                setTimeout(() => {
-                    setShowPopupCorrect(false);
-                    return navigate('/Home');
-                }, 2500);
-
-            }, 1000)
+                setShowPopupCorrect(false);
+                return navigate('/Home');
+            }, 1500);
+            
         }
         catch (error) {
             console.log("Username or Password Incorrect")
