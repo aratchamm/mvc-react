@@ -17,6 +17,9 @@ function Signup()
 }, []);
 
 
+  const [showPopupAlready, setShowPopupAlready] = useState(false);
+  const [showPopupReqiured, setShowPopupReqiured] = useState(false);
+  const [showPopupSuccessfully, setShowPopupSuccessfully] = useState(false);
 
   const navigate = useNavigate()
   const [signupUser, setSignupUser] = useState({
@@ -30,7 +33,10 @@ function Signup()
     signupUser.password==""||
     signupUser.phone==""){
       console.log("Please enter reqiured info")
-      alert("Please enter reqiured info")
+      setShowPopupReqiured(true);
+            setTimeout(() => {
+              setShowPopupReqiured(false);
+            }, 1500);
     }
     else{
       try{
@@ -47,15 +53,20 @@ function Signup()
           }
         })
         console.log("Sign Up Successfully")
-        alert("Sign Up Successfully")
         setTimeout(() => {
-          alert("going to login")
-          navigate('/login')
-        }, 3000)
+          setShowPopupSuccessfully(true);
+                setTimeout(() => {
+                  setShowPopupSuccessfully(false);
+                    navigate('/Login');
+                }, 2500);
+            }, 1000)
       }
       catch(err){
         console.log("This username is already in use")
-        alert("This username is already in use")
+        setShowPopupAlready(true);
+            setTimeout(() => {
+              setShowPopupAlready(false);
+            }, 1500);
       }
     }
   }
@@ -98,7 +109,7 @@ function Signup()
                     e.target.value,
               })
             }}
-            type="username"  maxLength="10" onKeyDown={handleKeyDown} placeholder="" />
+            type="username" maxLength="10" onKeyDown={handleKeyDown} placeholder="" />
             <label>PASSWORD</label>
             <input onChange={(e) => {
               setSignupUser({
@@ -106,7 +117,7 @@ function Signup()
                 password:
                     e.target.value,
               })
-            }} type={inputType} onKeyDown={handleKeyDown} placeholder="" /><span onClick={handlePasswordClick} className={inputClassName}></span>
+            }} type={inputType} onKeyDown={handleKeyDown} placeholder="" /><span  style={{cursor: 'pointer'}} onClick={handlePasswordClick} className={inputClassName}></span>
             <label>TEL NUMBER</label>
             <input onChange={(e) => {
               setSignupUser({
@@ -126,6 +137,40 @@ function Signup()
           <div className="py-2 not-member"><h6>Already have an account?<Link to="/login"> Log in</Link></h6>
           </div>
         </div>
+
+
+        {showPopupAlready && (
+
+<div id="popup4" className="overlay">
+    <div className="popup4 h1 text-center">
+    <i class="fa-solid fa-circle-exclamation"></i>
+        <div className="h4 py-4"><b>Account already in use</b></div>
+    </div>
+</div>
+)}
+
+{showPopupReqiured && (
+
+<div id="popup4" className="overlay">
+    <div className="popup4 h1 text-center">
+    <i class="fa-solid fa-question"></i>
+        <div className="h4 py-4"><b>Please enter reqiured info</b></div>
+    </div>
+</div>
+)}
+
+{showPopupSuccessfully && (
+
+<div id="popup4" className="overlay">
+    <div className="popup4 h1 text-center">
+        <i className="fa-solid fa-circle-check" style={{ color: 'green' }}></i>
+        <div className="h4 py-4"><b>Sign Up Successfully</b></div>
+    </div>
+</div>
+)}
+
+
+
       </div>
     );
 }

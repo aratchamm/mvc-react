@@ -46,7 +46,9 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
             </div>
             <div className="col-3 py-3 m-auto">
                 <div>{By}</div>
-                <div className='pt-1'>{Tel.substring(0, 3)}-{Tel.substring(3, 6)}-{Tel.substring(6, 10)}</div>
+                <div className='pt-1'>
+                    {Tel.substring(0, 3)}-{Tel.substring(3, 6)}-{Tel.substring(6, 10)}
+                    </div>
             </div>
             <div className="col-3 py-3 m-auto">
                 {Menu}

@@ -6,7 +6,6 @@ import Profile from "./Profile";
 
 
 import Card from "./Card";
-import DataCards from "./DataCard";
 
 import RubFak from "./Fak";
 import DataRubFak from "./DataFak";
@@ -27,7 +26,7 @@ function Home() {
     username: "",
     password: "",
     phone: "",
-    profileImgIndex: 0
+    profileImgIndex: -1
   });
 
   const navigate = useNavigate();
@@ -78,6 +77,7 @@ function Home() {
         return navigate('/login');
       }
     }
+    protectRoute();
 
     async function fetchProfile() {
       try {
@@ -95,8 +95,7 @@ function Home() {
       }
     }
     fetchProfile();
-    protectRoute();
-
+  
     async function GetListJobs() {
       try {
         const res = await axios({
@@ -106,13 +105,15 @@ function Home() {
             Authorization: `Bearer ${token}`,
           },
         })
-        setDataCard(res.data);
-      }
+        setDataCard(res.data)
+      }     
       catch (error) {
         console.log("Get Job Error")
       }
     }
     GetListJobs();
+    
+    
     
 
     document.body.classList.add('HOME');
@@ -158,6 +159,26 @@ function Home() {
     };
   }
 
+  async function createPostHandler(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Post/CreatePost',
+        method:'POST',
+        data:{
+          Limit : currentCountNum,
+          Time : 12.30
+        },
+        headers:{
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      console.log("Create Post Success")
+    }
+    catch{
+      console.log("Failed to Post");
+    }
+    togglePopup();
+  }
 
   return (
     <div id="content" className="container-fluid">
@@ -178,14 +199,19 @@ function Home() {
 
         </div>
         <div className="col-12 col-sm-6 col-lg-8" id="navCenter">
-          {DataCard.map((data) => (
-            <Card imgRiderSrc={urlListPost[data.ImgIndex]} imgCilentSrc={undefined} imgCilentSrc2={undefined} imgCilentSrc3={undefined} Header={data.OwnerUserName} />
-          ))}
+          {DataCard.map((data) => {
+            return <Card 
+            imgRiderSrc={urlListPost[data.imgIndex]} 
+            imgCilentSrc={data.items[0] ? urlList[data.items[0]]:undefined} 
+            imgCilentSrc2={data.items[1] ? urlList[data.items[1]]:undefined} 
+            imgCilentSrc3={data.items[2] ? urlList[data.items[2]]:undefined} 
+            Header={data.ownerUserName} />})}
+          
         </div>
 
         <div className="col-12 col-sm-3 col-lg-2 text-left" id="navRight">
           <div className='row'>
-          <div className="col-2"><span className="h1 m-0 material-icons">notifications</span></div>
+          <div className="col-2 "><span className="h1 my-0 material-icons">notifications</span></div>
           <div className="col-10 mt-1 h2"><b>รายการของฉัน</b></div>
           </div>
          
@@ -202,7 +228,7 @@ function Home() {
             ))}
 
             <div className="col-12 h6 p-2 my-auto">
-              <a href='/Status' id="view"><i>view all >></i></a>
+              <a href='/Status' id="view"><i>view all &gt;&gt;</i></a>
             </div>
 
 
@@ -221,7 +247,7 @@ function Home() {
             ))}
 
             <div className="col-12 h6 p-2 my-auto">
-              <a href='/Status' id="view"><i>view all >></i></a>
+              <a href='/Status' id="view"><i>view all &gt;&gt;</i></a>
             </div>
 
           </div>
@@ -314,7 +340,7 @@ function Home() {
             </div>
             <br></br>
             <div class='h4 p-4 text-center'>
-              <input onClick={togglePopup} style={{ backgroundColor: '#ff000d' }} id="POST" class="button1 p-3 " type="submit" value="POST" ></input>
+              <input onClick={createPostHandler} style={{ backgroundColor: '#ff000d' }} id="POST" class="button1 p-3 " type="submit" value="POST" ></input>
             </div>
           </div>
         </div>

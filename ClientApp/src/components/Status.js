@@ -27,7 +27,7 @@ function Status() {
     username: "",
     password: "",
     phone: "",
-    profileImgIndex: 0
+    profileImgIndex: -1
   });
 
 
@@ -117,7 +117,7 @@ function Status() {
                   <div className='p-2'>
                     <input id="d" type="checkbox" ></input>
                       <label for="d">
-                        <div className='col-12 bg-white' id="Toggle" onClick={toggleshow} className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
+                        <div style={{cursor: 'pointer'}} className='col-12 bg-white' id="Toggle" onClick={toggleshow} className="can-toggle__switch" data-checked="รับฝาก" data-unchecked="ฝากซื้อ"></div>
                       </label>
               </div>
                 </div>
