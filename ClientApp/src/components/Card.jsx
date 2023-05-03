@@ -1,13 +1,52 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-const Data = ({ imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header, imgRiderSrc }) => {
+const Data = ({cardId ,imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header, imgRiderSrc ,limit ,Hour ,Minute}) => {
 
+  const [orderInfo, setOrderInfo] = useState({
+    foodName:"",
+    note:""
+  });
   const [showPopup, setShowPopup] = useState(false);
   const [currentCount, setCurrentCount] = useState(0);
+  const token = localStorage.getItem('token');
+
+  async function CreateOrderHandler(){
+    if(currentCount==0 || orderInfo.foodName == "" ){
+      console.log("Please Enter Required Info");
+    }
+    else{
+      try{
+        const res = await axios({
+          url:'https://localhost:7161/api/Order/CreateOrder',
+          method:'POST',
+          data:{
+            PostId:cardId,
+            FoodName:orderInfo.foodName,
+            Note:orderInfo.note,
+            Count:currentCount
+          },
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        });
+        console.log("Create Order Success");
+        togglePopup();
+      }
+      catch{
+        console.log("Cannot Create Your Order");
+      }
+      
+    }
+  }
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
     setCurrentCount(0);
+    setOrderInfo({
+      foodName:"",
+      note:""
+    });
   }
 
   const incrementCounter = () => {
@@ -29,6 +68,9 @@ const Data = ({ imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header, imgRiderSrc 
       ></img>
       <div className="p-2 text-center">
         <h3>{Header}</h3>
+        <h3>{limit}</h3>
+        <h3>{Hour} : {Minute}</h3>
+        
       </div>
       <div className="container">
         <div className="row">
@@ -72,9 +114,23 @@ const Data = ({ imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header, imgRiderSrc 
               <div style={{margin: '2%'}} className="content">
                 <form className="px-5" action="">
                   <p className="h5 p-2 c" for="fname">ชื่ออาหาร</p>
-                  <input style={{width: '98%'}} className="p-2 h6 d-block m-auto" type="text" id="fname" name="fname" placeholder=" ตัวอย่าง ข้าวผัดกระเทียม"></input>
+                  <input onChange={(e) => {
+                    setOrderInfo({
+                        ...orderInfo,
+                        foodName:
+                            e.target.value,
+                    })
+                  }} 
+                  style={{width: '98%'}} className="p-2 h6 d-block m-auto" type="text" id="fname" name="fname" placeholder=" ตัวอย่าง ข้าวผัดกระเทียม"></input>
                   <p className="h5 px-2 pt-4 pb-2 c" for="note">หมายเหตุ (ถ้ามี)</p>
-                  <input style={{width: '98%'}} className="p-2 h6 d-block m-auto" type="text" id="note" name="note" placeholder=" ตัวอย่าง ไม่ใส่ผัก"></input>
+                  <input onChange={(e) => {
+                    setOrderInfo({
+                        ...orderInfo,
+                        note:
+                            e.target.value,
+                    })
+                  }}  
+                  style={{width: '98%'}} className="p-2 h6 d-block m-auto" type="text" id="note" name="note" placeholder=" ตัวอย่าง ไม่ใส่ผัก"></input>
                 </form>
                 <div className="row pt-4">
                   <div className="col-4 text-center  m-auto">
@@ -102,7 +158,7 @@ const Data = ({ imgCilentSrc, imgCilentSrc2, imgCilentSrc3, Header, imgRiderSrc 
                     
                   </div>
                   <div className="col-7">
-                  <input style={{backgroundColor: '#ff000d'}}  onClick={togglePopup} className="button1 h4 p-3" type="submit" value="ฝากเลย"></input>
+                  <input style={{backgroundColor: '#ff000d'}}  onClick={CreateOrderHandler} className="button1 h4 p-3" type="submit" value="ฝากเลย"></input>
                   </div>
                 </div>
               </div>

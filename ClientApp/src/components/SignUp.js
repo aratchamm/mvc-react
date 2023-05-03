@@ -57,7 +57,7 @@ function Signup()
           setShowPopupSuccessfully(true);
                 setTimeout(() => {
                   setShowPopupSuccessfully(false);
-                    navigate('/Login');
+                    return navigate('/Login');
                 }, 2500);
             }, 1000)
       }

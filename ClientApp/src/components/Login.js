@@ -47,7 +47,7 @@ function Login() {
                 setShowPopupCorrect(true);
                 setTimeout(() => {
                     setShowPopupCorrect(false);
-                    navigate('/Home');
+                    return navigate('/Home');
                 }, 2500);
 
             }, 1000)

@@ -33,7 +33,7 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
   function handleConfirm() {
     setShowButtons(false);
     setStatusText("รอส่งอาหาร");
-    setStatusColor("orange");
+    setStatusColor("#ff0000");
     togglePopup_Confirm();
   }
 

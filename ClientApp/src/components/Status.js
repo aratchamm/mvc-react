@@ -9,7 +9,6 @@ import StatusFak from "./StatusFak";
 import StatusDatafak from "./StatusDataFak";
 
 import StatusRub from "./StatusRub";
-import StatusDataRub from "./StatusDataRub";
 
 import axios from 'axios';
 
@@ -22,6 +21,8 @@ function Status() {
   const [showRub, setShowRub] = useState(false);
   const [showFak, setShowFak] = useState(true);
 
+  const [RubFarkData,setRubFarkData] = useState([]);
+
   const [userProfile, setUserProfile] = useState({
     id: "",
     username: "",
@@ -31,7 +32,7 @@ function Status() {
   });
 
 
-  const toggleshow = () => {
+  function toggleshow(){
     setShowFak(!showFak);
     setShowRub(!showRub);
   }
@@ -49,9 +50,7 @@ function Status() {
   ];
 
   function changeHome() {
-    setTimeout(() => {
-      return navigate('/Home')
-  }, 1000)
+    return navigate('/Home')
   }
 
 
@@ -79,8 +78,9 @@ function Status() {
         console.log("User NotFound");
       }
     }
+    protectRoute();
     fetchProfile();
-    protectRoute()
+    
     document.body.classList.add('Status');
 
 
@@ -88,8 +88,25 @@ function Status() {
     return () => {
       document.body.classList.remove('Status');
     }
-  }, [showFak, showRub]);
+  }, []);
 
+  async function ListOrdersByMyPost(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Order/GetOrdersByMyPost',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      setRubFarkData(res.data);
+      console.log("ListOrdersByMyPost Success");
+    }
+    catch{
+      console.log("Failed to load OrdersByMyPost")
+    }
+  }
+  ListOrdersByMyPost();
 
   return (
     <div id="content" className="container">
@@ -165,9 +182,18 @@ function Status() {
                 </div>
                 <div className='m0 p0 blank'>.</div>
                 <div id='Sub' className='row text-left py-4 h6 m-auto bg-white'>
-                  {StatusDataRub.map((data) => (
-                    <StatusRub key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Color={data.Color} Tel={data.Tel} />
-                  ))}
+                  {RubFarkData.map((data)=>{
+                    if(data.orderStatus == "waiting"){data.orderStatus="รอยืนยัน"}
+                    else if(data.orderStatus == "accept"){data.orderStatus="รอส่งอาหาร"}
+
+                    return <StatusRub 
+                    Status={data.orderStatus} 
+                    By={data.username}
+                    Menu={data.foodName}
+                    Detail={data.note}
+                    Tel={data.phone} 
+                  />})}
+                  
                 </div>
               </div>}
           </div>

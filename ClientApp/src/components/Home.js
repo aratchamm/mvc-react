@@ -8,7 +8,7 @@ import Profile from "./Profile";
 import Card from "./Card";
 
 import RubFak from "./Fak";
-import DataRubFak from "./DataFak";
+import DataFak from "./DataFak";
 
 import Rub from "./Rub";
 import DataRub from "./DataRub";
@@ -20,7 +20,9 @@ function Home() {
   const token = localStorage.getItem("token");
   const [showPopup, SetShowPopup] = useState(false);
   const [currentCountNum, SetcurrentCountNum] = useState(0);
-  const [currentCountTime, SetcurrentCountTime] = useState(0);
+  const [hour , setHour] = useState(-1);
+  const [minute , setMinute] = useState(-1);
+  const [RubFarkData,setRubFarkData] = useState([]);
   const [userProfile, setUserProfile] = useState({
     id: "",
     username: "",
@@ -28,6 +30,11 @@ function Home() {
     phone: "",
     profileImgIndex: -1
   });
+  const [currentTime, setCurrentTime] = useState({
+    hour: "",
+    minute: ""
+  });
+
 
   const navigate = useNavigate();
 
@@ -95,38 +102,52 @@ function Home() {
       }
     }
     fetchProfile();
-  
-    async function GetListJobs() {
-      try {
-        const res = await axios({
-          url: 'https://localhost:7161' + '/api/Post/ListAllPosts',
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        setDataCard(res.data)
-      }     
-      catch (error) {
-        console.log("Get Job Error")
-      }
-    }
+    ListOrdersByMyPost();
     GetListJobs();
-    
-    
-    
 
     document.body.classList.add('HOME');
-
     return () => {
       document.body.classList.remove('HOME');
     }
   }, []);
 
+  async function GetListJobs() {
+    try {
+      const res = await axios({
+        url: 'https://localhost:7161' + '/api/Post/ListAllPosts',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setDataCard(res.data)
+    }     
+    catch (error) {
+      console.log("Get Job Error")
+    }
+  }
+  GetListJobs();
+
+  async function ListOrdersByMyPost(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Order/GetOrdersByMyPost',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      setRubFarkData(res.data);
+      console.log("ListOrdersByMyPost Success");
+    }
+    catch{
+      console.log("Failed to load OrdersByMyPost")
+    }
+  }
+  ListOrdersByMyPost();
+
   function changeStatus() {
-    setTimeout(() => {
-      return navigate('/Status')
-    }, 1000)
+    return navigate('/Status')
   }
 
 
@@ -134,7 +155,8 @@ function Home() {
     SetShowPopup(!showPopup);
     if (showPopup == true) {
       SetcurrentCountNum(0);
-      SetcurrentCountTime(0);
+      setHour(0);
+      setMinute(0);
     }
   };
 
@@ -149,35 +171,31 @@ function Home() {
     };
   }
 
-  function increaseTime() {
-    SetcurrentCountTime(currentCountTime + 1);
-  }
-
-  function decreaseTime() {
-    if (currentCountTime > 0) {
-      SetcurrentCountTime(currentCountTime - 1);
-    };
-  }
-
   async function createPostHandler(){
-    try{
-      const res = await axios({
-        url:'https://localhost:7161/api/Post/CreatePost',
-        method:'POST',
-        data:{
-          Limit : currentCountNum,
-          Time : 12.30
-        },
-        headers:{
-          Authorization: `Bearer ${token}`,
-        }
-      })
-      console.log("Create Post Success")
+    if(hour==-1||minute===-1||currentCountNum==0){
+      console.log("Please enter reqiured info");
     }
-    catch{
-      console.log("Failed to Post");
+    else{
+      try{
+        const res = await axios({
+          url:'https://localhost:7161/api/Post/CreatePost',
+          method:'POST',
+          data:{
+            Limit : currentCountNum,
+            Hour: hour,
+            Minute: minute
+          },
+          headers:{
+            Authorization: `Bearer ${token}`,
+          }
+        })
+        console.log("Create Post Success")
+      }
+      catch{
+        console.log("Failed to Post");
+      }
+      togglePopup();
     }
-    togglePopup();
   }
 
   return (
@@ -201,11 +219,15 @@ function Home() {
         <div className="col-12 col-sm-6 col-lg-8" id="navCenter">
           {DataCard.map((data) => {
             return <Card 
+            cardId = {data.id}
             imgRiderSrc={urlListPost[data.imgIndex]} 
             imgCilentSrc={data.items[0] ? urlList[data.items[0]]:undefined} 
             imgCilentSrc2={data.items[1] ? urlList[data.items[1]]:undefined} 
             imgCilentSrc3={data.items[2] ? urlList[data.items[2]]:undefined} 
-            Header={data.ownerUserName} />})}
+            Header={data.ownerUserName}
+            limit={data.limit} 
+            Hour={data.hour}
+            Minute={data.minute}/>})}
           
         </div>
 
@@ -223,7 +245,7 @@ function Home() {
               </div>
             </div>
 
-            {DataRubFak.slice(0, 3).map((data) => (
+            {DataFak.slice(0, 3).map((data) => (
               <RubFak key={data.id} Status={data.Status} Menu={data.Menu} Color={data.Color} />
             ))}
 
@@ -242,9 +264,13 @@ function Home() {
 
             </div>
 
-            {DataRub.slice(0, 3).map((data) => (
-              <Rub key={data.id} Status={data.Status} Menu={data.Menu} Color={data.Color} />
-            ))}
+            {RubFarkData.slice(0, 3).map((data) => {
+              if(data.orderStatus == "waiting"){data.orderStatus="รอยืนยัน"}
+              else if(data.orderStatus == "accept"){data.orderStatus="รอส่งอาหาร"}
+              return <Rub 
+              Status={data.orderStatus} 
+              Menu={data.foodName}
+            />})}
 
             <div className="col-12 h6 p-2 my-auto">
               <a href='/Status' id="view"><i>view all &gt;&gt;</i></a>
@@ -262,26 +288,39 @@ function Home() {
 
 
       {showPopup && (
-
         <div id="popup2" className="overlay">
           <div className="popup2">
             <a className="close m-3" onClick={togglePopup}>
-              <img border="0" alt="" src="https://sv1.picz.in.th/images/2023/05/01/yqEb4J.png"></img>
+              <img
+                border="0"
+                alt=""
+                src="https://sv1.picz.in.th/images/2023/05/01/yqEb4J.png"
+              ></img>
             </a>
-            <div className="h2 pt-2 pb-4 "><b>หิวไหม?</b></div>
+            <div className="h2 pt-2 pb-4 ">
+              <b>หิวไหม?</b>
+            </div>
             <div className="row px-1 text-center">
               <div className="row text-center">
-
                 <div className="col-2 h4  m-auto">
-                  <img src="https://sv1.picz.in.th/images/2023/05/01/yqEkPk.png" ></img>
-
+                  <img src="https://sv1.picz.in.th/images/2023/05/01/yqEkPk.png"></img>
                 </div>
 
-                <div className="col-2 h5 m-auto text-center" for="chooseAmount">จำนวน</div>
+                <div className="col-4 h5 m-auto text-center" for="chooseAmount">
+                  จำนวนที่รับ
+                </div>
 
                 <div className="col-2 h4 ml-5 my-auto">
-                  <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={decrementCounterNum}>-</button>
-
+                  <button
+                    style={{
+                      backgroundColor: 'transparent',
+                      color: '#ff0000',
+                      borderColor: '#ff0000',
+                    }}
+                    onClick={decrementCounterNum}
+                  >
+                    -
+                  </button>
                 </div>
 
                 <div className="col-2 h3 m-auto text-center">
@@ -289,71 +328,87 @@ function Home() {
                 </div>
 
                 <div className="col-2 h4 m-auto">
-                  <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={incrementCounterNum}>+</button>
+                  <button
+                    style={{
+                      backgroundColor: 'transparent',
+                      color: '#ff0000',
+                      borderColor: '#ff0000',
+                    }}
+                    onClick={incrementCounterNum}
+                  >
+                    +
+                  </button>
                 </div>
-
-                <div className="col-2 h5 m-auto">ชิ้น</div>
-
-
-
 
               </div>
 
               <div className="row pt-4 text-center">
-
-                <div className="col-2 h4  m-auto">
-                  <img src="https://sv1.picz.in.th/images/2023/05/01/yqEhKl.png"></img>
-
-                </div>
-
-                <div className="col-2 h5 m-auto text-center" for="chooseAmount">เวลา</div>
-
-                <div className="col-2 h4 ml-5 my-auto">
-                  <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={decreaseTime}>-</button>
-
-                </div>
-
-                <div className="col-2 h3 m-auto text-center">
-                  {currentCountTime}
-                </div>
-
-                <div className="col-2 h4 m-auto">
-                  <button style={{ backgroundColor: 'transparent', color: '#ff0000', borderColor: '#ff0000' }} onClick={increaseTime}>+</button>
-                </div>
-
-                <div className="col-2 h5 m-auto">
-                  <select style={{ borderRadius: '20px', borderWidth: '2px', textAlign: 'center' }} id="chooseTime">
-                    <option value="min" selected>นาที</option>
-                    <option value="hr">ชั่วโมง</option>
-                  </select>
-                </div>
-
-
-
-
-
-
+              <div className="col-2 h4 m-auto">
+                <img src="https://sv1.picz.in.th/images/2023/05/04/yDLJbV.png" alt="logo" />
               </div>
-
+              <div className="col-4 h5 m-auto text-center" for="chooseAmount">
+                  เวลาปิดรับ
+                </div>
+              <div className="col-6 d-flex align-items-center">
+                <input
+                  style={{
+                    width: '39%',
+                    marginRight: '10px',
+                    marginLeft: '10px',
+                    textAlign: 'center',
+                    borderRadius: '5px',
+                    
+                  }}
+                  onChange={(e) => {
+                    setHour(e.target.value)
+                  }}
+                  type="text"placeholder="ชั่วโมง"maxLength="2" onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key) || Number(event.target.value + event.key) > 23) {
+                      event.preventDefault();
+                  }
+                }}
+          
+                />
+                <span><b>:</b></span>
+                <input
+                  style={{
+                    width: '39%',
+                    marginLeft: '10px',
+                    textAlign: 'center',
+                    borderRadius: '5px',
+                  }}
+                  onChange={(e) => {
+                    setMinute(e.target.value)
+                  }}
+                  type="text"placeholder="นาที"maxLength="2" onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key) || Number(event.target.value + event.key) > 59) {
+                      event.preventDefault();
+                    }
+                  }}
+                />
+              </div>
             </div>
-            <div>
             </div>
+            <div></div>
             <br></br>
-            <div class='h4 p-4 text-center'>
-              <input onClick={createPostHandler} style={{ backgroundColor: '#ff000d' }} id="POST" class="button1 p-3 " type="submit" value="POST" ></input>
+
+            <div class="h4 p-4 text-center">
+              <input
+                onClick={() => {
+                  createPostHandler();
+                  togglePopup();
+                }}
+                style={{ backgroundColor: '#ff000d' }}
+                id="POST"
+                class="button1 p-3"
+                type="submit"
+                value="POST"
+              />
             </div>
           </div>
         </div>
-
-
       )}
-
-
-
-
     </div>
-
-
   );
 }
 export default Home;
