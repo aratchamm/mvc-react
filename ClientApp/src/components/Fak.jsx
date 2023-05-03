@@ -1,7 +1,6 @@
 import React from "react";
 
 
-
 const Data = ({ Status, Menu,Color }) => {
   return (
     <div className="row p-1">

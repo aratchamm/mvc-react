@@ -118,7 +118,7 @@ function Status() {
           <br />
           <ul className="navbar-nav flex-grow">
             <NavItem>
-              <div  onClick={changeHome}  style={{cursor: 'pointer'}}  className="opacity-50"><NavLink id="HomeButton" className="text-dark" ><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink></div>
+              <div  className="opacity-50" onClick={changeHome}  style={{cursor: 'pointer'}} ><NavLink id="HomeButton" className="text-dark" ><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink></div>
             </NavItem>
             <NavItem>
               <NavLink style={{cursor: 'pointer'}}  id="StatusButton" ><h3><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"></img><b>Status</b></h3></NavLink>
@@ -147,7 +147,7 @@ function Status() {
                     <b>สถานะ</b>
                   </div>
                   <div className="col-3 py-2 ">
-                    <b>ข้อมูลผู้ฝาก</b>
+                    <b>ช่องทางติดต่อ</b>
                   </div>
                   <div className="col-3 py-2 ">
                     <b>ชื่ออาหาร</b>
@@ -171,7 +171,7 @@ function Status() {
                     <b>สถานะ</b>
                   </div>
                   <div className="col-3 py-2 ">
-                    <b>ข้อมูลผู้รับ</b>
+                    <b>ช่องทางติดต่อ</b>
                   </div>
                   <div className="col-3 py-2 ">
                     <b>ชื่ออาหาร</b>

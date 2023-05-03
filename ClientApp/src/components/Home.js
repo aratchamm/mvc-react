@@ -207,10 +207,10 @@ function Home() {
           <br />
           <ul className="navbar-nav flex-grow">
             <NavItem>
-              <NavLink style={{cursor: 'pointer'}} id="HomeButton" className="text-dark"><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png" alt='iconHome'></img><b>Home</b></h3></NavLink>
+              <div style={{cursor: 'pointer'}} ><NavLink id="HomeButton" className="text-dark" ><h3><img id="HomeIconButton" src="https://sv1.picz.in.th/images/2023/04/24/y3dDQv.png"></img><b>Home</b></h3></NavLink></div>
             </NavItem>
             <NavItem>
-              <div style={{cursor: 'pointer'}} onClick={changeStatus} className="opacity-50"><h3><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png" alt='iconStatus'></img><b>Status</b></h3></div>
+              <NavLink className="opacity-50"  onClick={changeStatus} style={{cursor: 'pointer'}}  id="StatusButton" ><h3><img id="StatusIconButton" src="https://sv1.picz.in.th/images/2023/04/25/y3S5mJ.png"  ></img><b>Status</b></h3></NavLink>
             </NavItem>
           </ul>
 
