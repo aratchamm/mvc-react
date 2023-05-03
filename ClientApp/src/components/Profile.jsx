@@ -8,7 +8,7 @@ const Data = ({ imgSrc, name, tel }) => {
               <br /><br />
                 <p>
                   <div className="h3 p-2"><b>{name}</b></div>
-                  <div className="h4 p-2">{tel}</div>
+                  <div className="h4 p-2">{tel.slice(0,3)}-{tel.slice(3,6)}-{tel.slice(6,10)}</div>
                 </p>
     </div>
   );

@@ -46,13 +46,6 @@ export class NavMenu extends Component {
 
   <Navbar  className="ml-auto">
     <NavItem>
-      <button style={buttonStyle} onClick={this.togglePopup} type="button" className="icon-button" >
-        <span className="material-icons">notifications</span>
-        <span style={displayButton} className="icon-button__badge">2</span>
-      </button>
-    </NavItem>
-
-    <NavItem>
     <NavbarBrand tag={Link} to="/login">
     <button tag={Link} to="/login" onClick={()=>{localStorage.clear();}} style={{border:'none', backgroundColor:'transparent'}}>
         <i className="fas fa-sign-out-alt"></i> Logout
