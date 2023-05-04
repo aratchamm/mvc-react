@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
-const Data = ({ Status, By, Menu, Detail, Tel }) => {
+const Data = ({ Status, By, Menu, Detail, Tel ,OrderId ,Token ,myFunc: reFetch}) => {
 
     const [showPopup, setShowPopup] = useState(false);
 
@@ -14,12 +15,6 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
     const [cancelText, setCancelText] = useState("ยกเลิกรายการ");
     const [statusColor, setStatusColor] = useState(StatusColor[Status]);
 
-    const togglePopup_cencel = () => {
-        setShowPopup(!showPopup);
-        setShowButtons(false);
-        setStatusText("ยกเลิกแล้ว");
-        setStatusColor("red");
-    }
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
@@ -27,6 +22,24 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
 
 
     const [statusText, setStatusText] = useState(Status);
+
+    async function handleCancel() {
+        try{
+          const res = await axios({
+            url:'https://localhost:7161/api/Order/RejectOrder?orderId='+OrderId,
+            method:'POST',
+            headers:{
+              Authorization:`Bearer ${Token}`
+            }
+          });
+          setShowPopup(!showPopup);
+          reFetch();
+          console.log("cancle Order Success");
+        }
+        catch{
+          console.log("Failed to Cancel Order")
+        } 
+      }
 
     return (
         <div className='row'>
@@ -67,7 +80,7 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
                         <div className="content">
                             <div className="row">
                                 <div className="col-6 mt-3">
-                                    <input style={{backgroundColor: '#ff000d'}} onClick={togglePopup_cencel} href="/Status" className="button1 h4 p-3" type="submit" value="ใช่"></input>
+                                    <input style={{backgroundColor: '#ff000d'}} onClick={handleCancel} href="/Status" className="button1 h4 p-3" type="submit" value="ใช่"></input>
                                 </div>
 
                                 <div className="col-6 mt-3">

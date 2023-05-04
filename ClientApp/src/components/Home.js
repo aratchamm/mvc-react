@@ -11,11 +11,12 @@ import RubFak from "./Fak";
 
 import Rub from "./Rub";
 
-import axios from 'axios'
+import axios from 'axios';
 
 
 function Home() {
   const token = localStorage.getItem("token");
+  const [myPost, setMyPost] = useState([]);
   const [showPopup, SetShowPopup] = useState(false);
   const [currentCountNum, SetcurrentCountNum] = useState(0);
   const [hour , setHour] = useState(-1);
@@ -28,10 +29,6 @@ function Home() {
     password: "",
     phone: "",
     profileImgIndex: -1
-  });
-  const [currentTime, setCurrentTime] = useState({
-    hour: "",
-    minute: ""
   });
 
   const navigate = useNavigate();
@@ -99,6 +96,7 @@ function Home() {
           }
         })
         setUserProfile(res.data);
+        console.log("fetch Profile Complete");
       }
       catch (error) {
         console.log("User NotFound");
@@ -108,12 +106,13 @@ function Home() {
     ListOrderByUserId();
     ListOrdersByMyPost();
     GetListJobs();
+    GetMyPost();
 
     document.body.classList.add('HOME');
     return () => {
       document.body.classList.remove('HOME');
     }
-  }, []);
+  }, [showPopup]);
 
   async function GetListJobs() {
     try {
@@ -125,12 +124,12 @@ function Home() {
         },
       })
       setDataCard(res.data)
+      console.log("Get job Complete");
     }     
     catch (error) {
       console.log("Get Job Error")
     }
   }
-  GetListJobs();
 
   async function ListOrdersByMyPost(){
     try{
@@ -142,12 +141,12 @@ function Home() {
         }
       });
       setRubFarkData(res.data);
+      console.log("ListOrdersByMyPost Success")
     }
     catch{
       console.log("Failed to load OrdersByMyPost")
     }
   }
-  ListOrdersByMyPost();
 
   async function ListOrderByUserId(){
     try{
@@ -159,17 +158,35 @@ function Home() {
         }
       });
       setFarkSueData(res.data);
+      console.log("ListOrderByUserId Success");
     }
     catch{
       console.log("Failed to load ListOrderByUserId");
     }
   }
-  ListOrderByUserId();
 
-  function changeStatus() {
-    return navigate('/Status')
+  async function GetMyPost(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161' + '/api/Post/GetMyPost',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      setMyPost(res.data)
+      console.log("GetMyJob Success");
+    }
+    catch{
+      console.log("Failed to load My Post");
+    }
   }
 
+  function changeStatus() {
+    localStorage.removeItem("isRefresh");
+    return navigate('/Status')
+  }
+  
 
   function togglePopup() {
     SetShowPopup(!showPopup);
@@ -178,6 +195,7 @@ function Home() {
       setHour(0);
       setMinute(0);
     }
+    GetMyPost();
   };
 
 
@@ -218,6 +236,23 @@ function Home() {
     }
   }
 
+  async function closePostHandler(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Post/ClosePost?postId='+myPost.id,
+        method:'POST',
+        headers:{
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      console.log("close post success");
+      GetMyPost();
+    }
+    catch{
+      console.log("Failed to close Post");
+    }
+  }
+
   return (
     <div id="content" className="container-fluid">
 
@@ -245,14 +280,14 @@ function Home() {
             imgCilentSrc2={data.items[1] ? urlList[data.items[1]]:undefined} 
             imgCilentSrc3={data.items[2] ? urlList[data.items[2]]:undefined} 
             Header={data.ownerUserName}
-            limit={data.limit} 
+            limit={data.limit-data.count} 
             Hour={data.hour}
             Minute={data.minute}/>})}
           
         </div>
 
-        <div className="col-12 col-sm-3 col-lg-2 text-left" id="navRight">
-          <div className='row px-2'>
+        <div className="col-12 col-sm-3 col-lg-2 pt-5 px-4 text-left" id="navRight">
+          <div className='row'>
           <div className="col-2 "><span className="h1 my-0 material-icons">notifications</span></div>
           <div className="col-10 mt-1 h2"><b>รายการของฉัน</b></div>
           </div>
@@ -303,7 +338,8 @@ function Home() {
           </div>
 
           <div className="mx-auto text-center">
-            <button onClick={togglePopup} className="h5 py-3 my-5" id="Get">สร้างรายการสั่งซื้อ</button>
+            {myPost=='' ? <button onClick={togglePopup} className="h5 py-3 my-5" id="Get">สร้างรายการสั่งซื้อ</button> : (myPost.status=="unfinish" ? <button onClick={closePostHandler} className="h5 py-3 my-5" id="Get">ปิดรับการสั่งซื้อ</button> : <></>)}
+            
           </div>
 
         </div>

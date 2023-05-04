@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
-const Data = ({ Status, By, Menu, Detail, Tel }) => {
-  const StatusColor = {
-    รอยืนยัน: "#8D8D8D",
-    รอส่งอาหาร: "orange",
-    ยกเลิกแล้ว: "red",
-  };
+const Data = ({ Status, By, Menu, Detail, Tel ,OrderId ,Token ,myFunc: reFetch}) => {
 
   const [showPopupConfirm, setShowPopupConfirm] = useState(false);
   const [showPopupCancel, setShowPopupCancel] = useState(false);
@@ -20,29 +16,83 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
   const [confirmText, setConfirmText] = useState("ยืนยัน");
   const [closeOrderText, setcloseOrderText] = useState("จัดส่งแล้ว");
 
-  const [statusColor, setStatusColor] = useState(StatusColor[Status]);
+  const [statusColor, setStatusColor] = useState("#8D8D8D");
   const [statusText, setStatusText] = useState(Status);
-
-  function handleCancel() {
-    setShowButtons(false);
-    setStatusText("ยกเลิกแล้ว");
-    setStatusColor("red");
-    setShowPopupCancel(!showPopupCancel);
+  
+  
+  function handleColor(){
+    if(Status=="รอยืนยัน"){
+      setStatusColor("#8D8D8D")
+    }
+    else{
+      setStatusColor("#FF0000")
+    }
   }
 
-  function handleConfirm() {
-    setShowButtons(false);
-    setStatusText("รอส่งอาหาร");
-    setStatusColor("#ff0000");
-    togglePopup_Confirm();
+  const [isCancleLoading , setIsCancleLoading ] = useState(false)
+  async function handleCancel() {
+    try{
+      setIsCancleLoading(true)
+      const res = await axios({
+        url:'https://localhost:7161/api/Order/RejectOrder?orderId='+OrderId,
+        method:'POST',
+        headers:{
+          Authorization:`Bearer ${Token}`
+        }
+      });
+      await  reFetch();
+
+      setShowPopupCancel(!showPopupCancel);
+      console.log("cancle Order Success");
+    }
+    catch{
+      console.log("Failed to Cancel Order")
+    } finally {
+      setIsCancleLoading(false)
+    }
+
+    
   }
 
-  function handleClose() {
-    setcloseOrderButtons(false);
-    // ลบ data ทิ้ง
-    setStatusText("ยืนยันแล้ว");
-    setStatusColor("green");
-    togglePopup_Close();
+  async function handleConfirm() {
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Order/AcceptOrder?orderId='+OrderId,
+        method:'POST',
+        headers:{
+          Authorization:`Bearer ${Token}`
+        }
+      });
+      console.log("Accept Order Success");
+      setShowPopupConfirm(!showPopupConfirm);
+      setShowButtons(false);
+      setcloseOrderButtons(true);
+      setStatusText("รอส่งอาหาร");
+      reFetch();
+    }
+    catch{
+      console.log("Failed to Accept Order")
+    }
+
+    
+  }
+
+  async function handleClose() {
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Order/CompleteOrder?orderId='+OrderId,
+        method:'POST',
+        headers:{
+          Authorization:`Bearer ${Token}`
+        }
+      });
+      togglePopup_Close();
+      reFetch();
+      console.log("Complete Order Success")
+    }
+    catch{
+      console.log("Faild to Complete Order")
+    }
   }
 
   const togglePopup_cencel = () => {
@@ -59,6 +109,7 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
   };
 
   useEffect(() => {
+    
     if (showPopupConfirm) {
       const timer = setTimeout(() => {
         setShowPopupConfirm(false);
@@ -146,7 +197,8 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
               style={{ color: "green" }}
             ></i>
             <div className="h4 py-4">
-              <b>คุณได้ยืนยันออเดอร์แล้ว</b>
+              <b>คุณได้ยืนยันออเดอร์แล้ว
+              </b>
             </div>
           </div>
         </div>
@@ -167,7 +219,10 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
       )}
 
       {showPopupCancel && (
-        <div id="popup3" className="overlay">
+        <div id="popup3" className="overlay ">
+          <div className="loading">
+            loading
+          </div>
           <div className="popup3 text-center">
             <a className="close my-1 mx-3" onClick={togglePopup_cencel}>
               <img
@@ -177,7 +232,10 @@ const Data = ({ Status, By, Menu, Detail, Tel }) => {
               ></img>
             </a>
             <div className="h3 py-4">
-              <b>คุณต้องการยกเลิกใช่หรือไม่?</b>
+              <b>คุณต้องการยกเลิกใช่หรือไม่?
+              {isCancleLoading && 'loading'}
+
+              </b>
             </div>
             <div className="content">
               <div className="row">

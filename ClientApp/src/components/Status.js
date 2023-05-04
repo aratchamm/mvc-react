@@ -50,13 +50,18 @@ function Status() {
   ];
 
   function changeHome() {
+    localStorage.removeItem('isRefresh');
     return navigate('/Home')
   }
 
 
 
   useEffect(() => {
-
+    const isRefresh = localStorage.getItem("isRefresh");
+    if(!isRefresh) {
+      localStorage.setItem("isRefresh", "0000");
+      window.location.reload();
+    }
     function protectRoute() {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -80,13 +85,15 @@ function Status() {
     }
     protectRoute();
     fetchProfile();
+    ListOrderByUserId();
+    ListOrdersByMyPost();
     
     document.body.classList.add('Status');
 
     return () => {
       document.body.classList.remove('Status');
     }
-  }, []);
+  }, [showRub,showFak]);
 
   async function ListOrdersByMyPost(){
     try{
@@ -121,8 +128,7 @@ function Status() {
       console.log("Failed to load OrdersByUserId")
     }
   }
-  ListOrderByUserId();
-  ListOrdersByMyPost();
+  
 
   return (
     <div id="content" className="container">
@@ -178,13 +184,17 @@ function Status() {
                   {FarkSueData.map((data) => {
                     if(data.orderStatus == "waiting"){data.orderStatus="รอยืนยัน"}
                     else if(data.orderStatus == "accept"){data.orderStatus="รอส่งอาหาร"}
-
                     return <StatusFak 
                     Status = {data.orderStatus}
                     By = {data.username}
                     Menu = {data.foodName}
                     Detail={data.note}
                     Tel={data.phone}
+                    OrderId={data.orderId}
+                    Token={token}
+                    myFunc = {async ()=>{
+                      await ListOrderByUserId()
+                    }}
                   />})}
                 </div>
               </div>}
@@ -216,7 +226,12 @@ function Status() {
                     By={data.username}
                     Menu={data.foodName}
                     Detail={data.note}
-                    Tel={data.phone} 
+                    Tel={data.phone}
+                    OrderId={data.orderId}
+                    Token={token}
+                    myFunc = {async ()=>{
+                      await ListOrdersByMyPost()
+                    }}
                   />})}
                   
                 </div>
