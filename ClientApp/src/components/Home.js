@@ -8,10 +8,8 @@ import Profile from "./Profile";
 import Card from "./Card";
 
 import RubFak from "./Fak";
-import DataFak from "./DataFak";
 
 import Rub from "./Rub";
-import DataRub from "./DataRub";
 
 import axios from 'axios'
 
@@ -23,6 +21,7 @@ function Home() {
   const [hour , setHour] = useState(-1);
   const [minute , setMinute] = useState(-1);
   const [RubFarkData,setRubFarkData] = useState([]);
+  const [FarkSueData,setFarkSueData] = useState([]);
   const [userProfile, setUserProfile] = useState({
     id: "",
     username: "",
@@ -34,7 +33,6 @@ function Home() {
     hour: "",
     minute: ""
   });
-
 
   const navigate = useNavigate();
 
@@ -77,6 +75,11 @@ function Home() {
 
 
   useEffect(() => {
+    const isRefresh = localStorage.getItem("isRefresh");
+    if(!isRefresh) {
+      localStorage.setItem("isRefresh", "0000");
+      window.location.reload();
+    }
     function protectRoute() {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -102,6 +105,7 @@ function Home() {
       }
     }
     fetchProfile();
+    ListOrderByUserId();
     ListOrdersByMyPost();
     GetListJobs();
 
@@ -131,20 +135,36 @@ function Home() {
   async function ListOrdersByMyPost(){
     try{
       const res = await axios({
-        url:'https://localhost:7161/api/Order/GetOrdersByMyPost',
+        url:'https://localhost:7161' + '/api/Order/GetOrdersByMyPost',
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         }
       });
       setRubFarkData(res.data);
-      console.log("ListOrdersByMyPost Success");
     }
     catch{
       console.log("Failed to load OrdersByMyPost")
     }
   }
   ListOrdersByMyPost();
+
+  async function ListOrderByUserId(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161' + '/api/Order/ListOrderByUserId',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      setFarkSueData(res.data);
+    }
+    catch{
+      console.log("Failed to load ListOrderByUserId");
+    }
+  }
+  ListOrderByUserId();
 
   function changeStatus() {
     return navigate('/Status')
@@ -202,7 +222,7 @@ function Home() {
     <div id="content" className="container-fluid">
 
       <div className="row">
-        <div className="col-12 col-sm-3 col-xs-3 col-lg-2  mt-5 text-center" id="navLeft">
+        <div className="col-12 col-sm-3 col-xs-3 col-lg-2  pt-5 text-center" id="navLeft">
           <Profile imgSrc={urlList[userProfile.profileImgIndex]} name={userProfile.username} tel={userProfile.phone} />
           <br />
           <ul className="navbar-nav flex-grow">
@@ -232,7 +252,7 @@ function Home() {
         </div>
 
         <div className="col-12 col-sm-3 col-lg-2 text-left" id="navRight">
-          <div className='row'>
+          <div className='row px-2'>
           <div className="col-2 "><span className="h1 my-0 material-icons">notifications</span></div>
           <div className="col-10 mt-1 h2"><b>รายการของฉัน</b></div>
           </div>
@@ -245,12 +265,16 @@ function Home() {
               </div>
             </div>
 
-            {DataFak.slice(0, 3).map((data) => (
-              <RubFak key={data.id} Status={data.Status} Menu={data.Menu} Color={data.Color} />
-            ))}
+            {FarkSueData.slice(0, 3).map((data) => {
+              if(data.orderStatus == "waiting"){data.orderStatus="รอยืนยัน"}
+              else if(data.orderStatus == "accept"){data.orderStatus="รอส่งอาหาร"}
+              return <RubFak 
+              Status = {data.orderStatus} 
+              Menu = {data.foodName}
+            />})}
 
             <div className="col-12 h6 p-2 my-auto">
-              <a href='/Status' id="view"><i>view all &gt;&gt;</i></a>
+            {FarkSueData.length > 0 ? <a href='/Status' id="view"><i>view all &gt;&gt;</i></a> : <h3></h3>}
             </div>
 
 
@@ -273,7 +297,7 @@ function Home() {
             />})}
 
             <div className="col-12 h6 p-2 my-auto">
-              <a href='/Status' id="view"><i>view all &gt;&gt;</i></a>
+            {RubFarkData.length > 0 ? <a href='/Status' id="view"><i>view all &gt;&gt;</i></a> : <h3></h3>}
             </div>
 
           </div>
@@ -347,7 +371,7 @@ function Home() {
                 <img src="https://sv1.picz.in.th/images/2023/05/04/yDLJbV.png" alt="logo" />
               </div>
               <div className="col-4 h5 m-auto text-center" for="chooseAmount">
-                  เวลาปิดรับ
+                  ปิดรับเวลา
                 </div>
               <div className="col-6 d-flex align-items-center">
                 <input

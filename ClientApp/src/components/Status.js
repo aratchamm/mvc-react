@@ -6,7 +6,6 @@ import './Status.css';
 import './Home.css';
 
 import StatusFak from "./StatusFak";
-import StatusDatafak from "./StatusDataFak";
 
 import StatusRub from "./StatusRub";
 
@@ -22,6 +21,7 @@ function Status() {
   const [showFak, setShowFak] = useState(true);
 
   const [RubFarkData,setRubFarkData] = useState([]);
+  const [FarkSueData,setFarkSueData] = useState([]);
 
   const [userProfile, setUserProfile] = useState({
     id: "",
@@ -83,8 +83,6 @@ function Status() {
     
     document.body.classList.add('Status');
 
-
-
     return () => {
       document.body.classList.remove('Status');
     }
@@ -106,6 +104,24 @@ function Status() {
       console.log("Failed to load OrdersByMyPost")
     }
   }
+
+  async function ListOrderByUserId(){
+    try{
+      const res = await axios({
+        url:'https://localhost:7161/api/Order/ListOrderByUserId',
+        method:'GET',
+        headers:{
+          Authorization:`Bearer ${token}`,
+        }
+      });
+      setFarkSueData(res.data);
+      console.log("ListOrderByUserId Success");
+    }
+    catch{
+      console.log("Failed to load OrdersByUserId")
+    }
+  }
+  ListOrderByUserId();
   ListOrdersByMyPost();
 
   return (
@@ -158,9 +174,18 @@ function Status() {
                 </div>
                 <div className='blank'>.</div>
                 <div id='Sub2' className='row text-left py-4 h6 m-auto bg-white'>
-                  {StatusDatafak.map((data) => (
-                    <StatusFak key={data.id} Status={data.Status} By={data.By} Menu={data.Menu} Detail={data.Detail} Tel={data.Tel} Color={data.Color} />
-                  ))}
+                  
+                  {FarkSueData.map((data) => {
+                    if(data.orderStatus == "waiting"){data.orderStatus="รอยืนยัน"}
+                    else if(data.orderStatus == "accept"){data.orderStatus="รอส่งอาหาร"}
+
+                    return <StatusFak 
+                    Status = {data.orderStatus}
+                    By = {data.username}
+                    Menu = {data.foodName}
+                    Detail={data.note}
+                    Tel={data.phone}
+                  />})}
                 </div>
               </div>}
 

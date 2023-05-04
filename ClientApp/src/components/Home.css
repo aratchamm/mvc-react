@@ -21,12 +21,15 @@ body.HOME {
   #navRight {
     padding-top: 10%;
     border-top: 0.1rem solid #8d8d8d36;
+    
     padding-bottom: 10%;
+    background-color: white;
+    border-radius: 20px;
   }
 
   #compo {
     width: 280px;
-    height: 250px;
+    height: 395px;
     margin: 2%;
   }
 
@@ -64,7 +67,7 @@ body.HOME {
 
     #compo {
       width: 150px;
-      height: 200px;
+      height: 395px;
     }
 
     .plus{
@@ -104,14 +107,14 @@ body.HOME {
     }
 
     #compo {
-      width: 350px;
-      height: 300px;
+      width: 370px;
+      height: 395px;
       margin: 2%;
     }
     .plus{
       width: 70%;
       max-width: 200px;
-      margin-top: 10px;
+      margin-top: 25px;
   }
   .photoCol {
     width: 23%;
@@ -124,7 +127,11 @@ body.HOME {
       position: fixed;
       top: 50%;
       transform: translate(0%, -50%);
-    }
+      -webkit-transform: translate(0%, -50%);
+      -moz-transform: translate(0%, -50%);
+      -ms-transform: translate(0%, -50%);
+      -o-transform: translate(0%, -50%);
+}
 
 
    }
@@ -141,13 +148,13 @@ body.HOME {
     }
     #compo {
       width: 350px;
-      height: 300px;
+      height: 395px;
       margin: 2%;
     }
     .plus{
       width: 70%;
       max-width: 200px;
-      margin-top: 10px;
+      margin-top: 25px;
   }
   .photoCol {
     width: 23%;
@@ -169,25 +176,35 @@ body.HOME {
   @media (min-width: 1400px ) {
 
     #navCenter {
-      border-left: 0.1rem solid #8d8d8d36;
-      border-right: 0.1rem solid #8d8d8d36;
       margin: auto;
+      height: 100%;
     }
 
     #navLeft, #navRight {
       position: fixed;
     }
+
+    #navLeft {
+      border-right: 0.1rem solid #8d8d8d36;
+      height: 100%;
+    }
+
+    #navRight {
+      border-left: 0.1rem solid #8d8d8d36;
+      border-top-width: 200%;
+    }
+
     
     #compo {
       width: 370px;
-      height: 300px;
+      height: 395px;
       margin: 2%;
       justify-content: center;
     }
     .plus{
       width: 70%;
       max-width: 200px;
-      margin-top: 10px;
+      margin-top: 25px;
   }
 
   .photoCol {
@@ -228,8 +245,6 @@ body.HOME {
   
   #navRight {
     right: 0;
-    background-color: white;
-    border-radius: 20px;
   }
 
   /* component */
@@ -247,10 +262,11 @@ body.HOME {
 
   .picCom {
     width: 100%; 
-    height: 60%; 
+    height: 45%; 
     border-radius: 10px; 
     object-fit: cover;
     margin-bottom: 2%;
+   
   }
 
   .plus {
@@ -258,8 +274,8 @@ body.HOME {
   }
 
   .photoCol {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 50%;
     float: left;
     margin-left: 10%;
